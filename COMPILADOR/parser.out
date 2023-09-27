@@ -1,0 +1,769 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> instruction program
+Rule 2     program -> instruction
+Rule 3     instruction -> r_inst
+Rule 4     instruction -> i_inst
+Rule 5     instruction -> li_inst
+Rule 6     instruction -> j_inst
+Rule 7     instruction -> ei_inst
+Rule 8     instruction -> s_inst
+Rule 9     instruction -> b_inst
+Rule 10    instruction -> u_inst
+Rule 11    instruction -> label_inst
+Rule 12    r_inst -> TYPE_R REGISTER COMMA REGISTER COMMA REGISTER
+Rule 13    i_inst -> TYPE_I REGISTER COMMA REGISTER COMMA IMMEDIATE
+Rule 14    i_inst -> TYPE_JI REGISTER COMMA REGISTER COMMA IMMEDIATE
+Rule 15    li_inst -> TYPE_LI REGISTER COMMA IMMEDIATE LPAREN REGISTER RPAREN
+Rule 16    j_inst -> TYPE_J REGISTER COMMA LABEL
+Rule 17    ei_inst -> TYPE_EI
+Rule 18    s_inst -> TYPE_S REGISTER COMMA IMMEDIATE LPAREN REGISTER RPAREN
+Rule 19    b_inst -> TYPE_B REGISTER COMMA REGISTER COMMA LABEL
+Rule 20    u_inst -> TYPE_U REGISTER COMMA IMMEDIATE
+Rule 21    label_inst -> LABEL COLON
+
+Terminals, with rules where they appear
+
+COLON                : 21
+COMMA                : 12 12 13 13 14 14 15 16 18 19 19 20
+IMMEDIATE            : 13 14 15 18 20
+LABEL                : 16 19 21
+LPAREN               : 15 18
+REGISTER             : 12 12 12 13 13 14 14 15 15 16 18 18 19 19 20
+RPAREN               : 15 18
+TYPE_B               : 19
+TYPE_EI              : 17
+TYPE_I               : 13
+TYPE_J               : 16
+TYPE_JI              : 14
+TYPE_LI              : 15
+TYPE_R               : 12
+TYPE_S               : 18
+TYPE_U               : 20
+error                : 
+
+Nonterminals, with rules where they appear
+
+b_inst               : 9
+ei_inst              : 7
+i_inst               : 4
+instruction          : 1 2
+j_inst               : 6
+label_inst           : 11
+li_inst              : 5
+program              : 1 0
+r_inst               : 3
+s_inst               : 8
+u_inst               : 10
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . instruction program
+    (2) program -> . instruction
+    (3) instruction -> . r_inst
+    (4) instruction -> . i_inst
+    (5) instruction -> . li_inst
+    (6) instruction -> . j_inst
+    (7) instruction -> . ei_inst
+    (8) instruction -> . s_inst
+    (9) instruction -> . b_inst
+    (10) instruction -> . u_inst
+    (11) instruction -> . label_inst
+    (12) r_inst -> . TYPE_R REGISTER COMMA REGISTER COMMA REGISTER
+    (13) i_inst -> . TYPE_I REGISTER COMMA REGISTER COMMA IMMEDIATE
+    (14) i_inst -> . TYPE_JI REGISTER COMMA REGISTER COMMA IMMEDIATE
+    (15) li_inst -> . TYPE_LI REGISTER COMMA IMMEDIATE LPAREN REGISTER RPAREN
+    (16) j_inst -> . TYPE_J REGISTER COMMA LABEL
+    (17) ei_inst -> . TYPE_EI
+    (18) s_inst -> . TYPE_S REGISTER COMMA IMMEDIATE LPAREN REGISTER RPAREN
+    (19) b_inst -> . TYPE_B REGISTER COMMA REGISTER COMMA LABEL
+    (20) u_inst -> . TYPE_U REGISTER COMMA IMMEDIATE
+    (21) label_inst -> . LABEL COLON
+
+    TYPE_R          shift and go to state 12
+    TYPE_I          shift and go to state 13
+    TYPE_JI         shift and go to state 14
+    TYPE_LI         shift and go to state 15
+    TYPE_J          shift and go to state 16
+    TYPE_EI         shift and go to state 18
+    TYPE_S          shift and go to state 19
+    TYPE_B          shift and go to state 20
+    TYPE_U          shift and go to state 21
+    LABEL           shift and go to state 17
+
+    program                        shift and go to state 1
+    instruction                    shift and go to state 2
+    r_inst                         shift and go to state 3
+    i_inst                         shift and go to state 4
+    li_inst                        shift and go to state 5
+    j_inst                         shift and go to state 6
+    ei_inst                        shift and go to state 7
+    s_inst                         shift and go to state 8
+    b_inst                         shift and go to state 9
+    u_inst                         shift and go to state 10
+    label_inst                     shift and go to state 11
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> instruction . program
+    (2) program -> instruction .
+    (1) program -> . instruction program
+    (2) program -> . instruction
+    (3) instruction -> . r_inst
+    (4) instruction -> . i_inst
+    (5) instruction -> . li_inst
+    (6) instruction -> . j_inst
+    (7) instruction -> . ei_inst
+    (8) instruction -> . s_inst
+    (9) instruction -> . b_inst
+    (10) instruction -> . u_inst
+    (11) instruction -> . label_inst
+    (12) r_inst -> . TYPE_R REGISTER COMMA REGISTER COMMA REGISTER
+    (13) i_inst -> . TYPE_I REGISTER COMMA REGISTER COMMA IMMEDIATE
+    (14) i_inst -> . TYPE_JI REGISTER COMMA REGISTER COMMA IMMEDIATE
+    (15) li_inst -> . TYPE_LI REGISTER COMMA IMMEDIATE LPAREN REGISTER RPAREN
+    (16) j_inst -> . TYPE_J REGISTER COMMA LABEL
+    (17) ei_inst -> . TYPE_EI
+    (18) s_inst -> . TYPE_S REGISTER COMMA IMMEDIATE LPAREN REGISTER RPAREN
+    (19) b_inst -> . TYPE_B REGISTER COMMA REGISTER COMMA LABEL
+    (20) u_inst -> . TYPE_U REGISTER COMMA IMMEDIATE
+    (21) label_inst -> . LABEL COLON
+
+    $end            reduce using rule 2 (program -> instruction .)
+    TYPE_R          shift and go to state 12
+    TYPE_I          shift and go to state 13
+    TYPE_JI         shift and go to state 14
+    TYPE_LI         shift and go to state 15
+    TYPE_J          shift and go to state 16
+    TYPE_EI         shift and go to state 18
+    TYPE_S          shift and go to state 19
+    TYPE_B          shift and go to state 20
+    TYPE_U          shift and go to state 21
+    LABEL           shift and go to state 17
+
+    instruction                    shift and go to state 2
+    program                        shift and go to state 22
+    r_inst                         shift and go to state 3
+    i_inst                         shift and go to state 4
+    li_inst                        shift and go to state 5
+    j_inst                         shift and go to state 6
+    ei_inst                        shift and go to state 7
+    s_inst                         shift and go to state 8
+    b_inst                         shift and go to state 9
+    u_inst                         shift and go to state 10
+    label_inst                     shift and go to state 11
+
+state 3
+
+    (3) instruction -> r_inst .
+
+    TYPE_R          reduce using rule 3 (instruction -> r_inst .)
+    TYPE_I          reduce using rule 3 (instruction -> r_inst .)
+    TYPE_JI         reduce using rule 3 (instruction -> r_inst .)
+    TYPE_LI         reduce using rule 3 (instruction -> r_inst .)
+    TYPE_J          reduce using rule 3 (instruction -> r_inst .)
+    TYPE_EI         reduce using rule 3 (instruction -> r_inst .)
+    TYPE_S          reduce using rule 3 (instruction -> r_inst .)
+    TYPE_B          reduce using rule 3 (instruction -> r_inst .)
+    TYPE_U          reduce using rule 3 (instruction -> r_inst .)
+    LABEL           reduce using rule 3 (instruction -> r_inst .)
+    $end            reduce using rule 3 (instruction -> r_inst .)
+
+
+state 4
+
+    (4) instruction -> i_inst .
+
+    TYPE_R          reduce using rule 4 (instruction -> i_inst .)
+    TYPE_I          reduce using rule 4 (instruction -> i_inst .)
+    TYPE_JI         reduce using rule 4 (instruction -> i_inst .)
+    TYPE_LI         reduce using rule 4 (instruction -> i_inst .)
+    TYPE_J          reduce using rule 4 (instruction -> i_inst .)
+    TYPE_EI         reduce using rule 4 (instruction -> i_inst .)
+    TYPE_S          reduce using rule 4 (instruction -> i_inst .)
+    TYPE_B          reduce using rule 4 (instruction -> i_inst .)
+    TYPE_U          reduce using rule 4 (instruction -> i_inst .)
+    LABEL           reduce using rule 4 (instruction -> i_inst .)
+    $end            reduce using rule 4 (instruction -> i_inst .)
+
+
+state 5
+
+    (5) instruction -> li_inst .
+
+    TYPE_R          reduce using rule 5 (instruction -> li_inst .)
+    TYPE_I          reduce using rule 5 (instruction -> li_inst .)
+    TYPE_JI         reduce using rule 5 (instruction -> li_inst .)
+    TYPE_LI         reduce using rule 5 (instruction -> li_inst .)
+    TYPE_J          reduce using rule 5 (instruction -> li_inst .)
+    TYPE_EI         reduce using rule 5 (instruction -> li_inst .)
+    TYPE_S          reduce using rule 5 (instruction -> li_inst .)
+    TYPE_B          reduce using rule 5 (instruction -> li_inst .)
+    TYPE_U          reduce using rule 5 (instruction -> li_inst .)
+    LABEL           reduce using rule 5 (instruction -> li_inst .)
+    $end            reduce using rule 5 (instruction -> li_inst .)
+
+
+state 6
+
+    (6) instruction -> j_inst .
+
+    TYPE_R          reduce using rule 6 (instruction -> j_inst .)
+    TYPE_I          reduce using rule 6 (instruction -> j_inst .)
+    TYPE_JI         reduce using rule 6 (instruction -> j_inst .)
+    TYPE_LI         reduce using rule 6 (instruction -> j_inst .)
+    TYPE_J          reduce using rule 6 (instruction -> j_inst .)
+    TYPE_EI         reduce using rule 6 (instruction -> j_inst .)
+    TYPE_S          reduce using rule 6 (instruction -> j_inst .)
+    TYPE_B          reduce using rule 6 (instruction -> j_inst .)
+    TYPE_U          reduce using rule 6 (instruction -> j_inst .)
+    LABEL           reduce using rule 6 (instruction -> j_inst .)
+    $end            reduce using rule 6 (instruction -> j_inst .)
+
+
+state 7
+
+    (7) instruction -> ei_inst .
+
+    TYPE_R          reduce using rule 7 (instruction -> ei_inst .)
+    TYPE_I          reduce using rule 7 (instruction -> ei_inst .)
+    TYPE_JI         reduce using rule 7 (instruction -> ei_inst .)
+    TYPE_LI         reduce using rule 7 (instruction -> ei_inst .)
+    TYPE_J          reduce using rule 7 (instruction -> ei_inst .)
+    TYPE_EI         reduce using rule 7 (instruction -> ei_inst .)
+    TYPE_S          reduce using rule 7 (instruction -> ei_inst .)
+    TYPE_B          reduce using rule 7 (instruction -> ei_inst .)
+    TYPE_U          reduce using rule 7 (instruction -> ei_inst .)
+    LABEL           reduce using rule 7 (instruction -> ei_inst .)
+    $end            reduce using rule 7 (instruction -> ei_inst .)
+
+
+state 8
+
+    (8) instruction -> s_inst .
+
+    TYPE_R          reduce using rule 8 (instruction -> s_inst .)
+    TYPE_I          reduce using rule 8 (instruction -> s_inst .)
+    TYPE_JI         reduce using rule 8 (instruction -> s_inst .)
+    TYPE_LI         reduce using rule 8 (instruction -> s_inst .)
+    TYPE_J          reduce using rule 8 (instruction -> s_inst .)
+    TYPE_EI         reduce using rule 8 (instruction -> s_inst .)
+    TYPE_S          reduce using rule 8 (instruction -> s_inst .)
+    TYPE_B          reduce using rule 8 (instruction -> s_inst .)
+    TYPE_U          reduce using rule 8 (instruction -> s_inst .)
+    LABEL           reduce using rule 8 (instruction -> s_inst .)
+    $end            reduce using rule 8 (instruction -> s_inst .)
+
+
+state 9
+
+    (9) instruction -> b_inst .
+
+    TYPE_R          reduce using rule 9 (instruction -> b_inst .)
+    TYPE_I          reduce using rule 9 (instruction -> b_inst .)
+    TYPE_JI         reduce using rule 9 (instruction -> b_inst .)
+    TYPE_LI         reduce using rule 9 (instruction -> b_inst .)
+    TYPE_J          reduce using rule 9 (instruction -> b_inst .)
+    TYPE_EI         reduce using rule 9 (instruction -> b_inst .)
+    TYPE_S          reduce using rule 9 (instruction -> b_inst .)
+    TYPE_B          reduce using rule 9 (instruction -> b_inst .)
+    TYPE_U          reduce using rule 9 (instruction -> b_inst .)
+    LABEL           reduce using rule 9 (instruction -> b_inst .)
+    $end            reduce using rule 9 (instruction -> b_inst .)
+
+
+state 10
+
+    (10) instruction -> u_inst .
+
+    TYPE_R          reduce using rule 10 (instruction -> u_inst .)
+    TYPE_I          reduce using rule 10 (instruction -> u_inst .)
+    TYPE_JI         reduce using rule 10 (instruction -> u_inst .)
+    TYPE_LI         reduce using rule 10 (instruction -> u_inst .)
+    TYPE_J          reduce using rule 10 (instruction -> u_inst .)
+    TYPE_EI         reduce using rule 10 (instruction -> u_inst .)
+    TYPE_S          reduce using rule 10 (instruction -> u_inst .)
+    TYPE_B          reduce using rule 10 (instruction -> u_inst .)
+    TYPE_U          reduce using rule 10 (instruction -> u_inst .)
+    LABEL           reduce using rule 10 (instruction -> u_inst .)
+    $end            reduce using rule 10 (instruction -> u_inst .)
+
+
+state 11
+
+    (11) instruction -> label_inst .
+
+    TYPE_R          reduce using rule 11 (instruction -> label_inst .)
+    TYPE_I          reduce using rule 11 (instruction -> label_inst .)
+    TYPE_JI         reduce using rule 11 (instruction -> label_inst .)
+    TYPE_LI         reduce using rule 11 (instruction -> label_inst .)
+    TYPE_J          reduce using rule 11 (instruction -> label_inst .)
+    TYPE_EI         reduce using rule 11 (instruction -> label_inst .)
+    TYPE_S          reduce using rule 11 (instruction -> label_inst .)
+    TYPE_B          reduce using rule 11 (instruction -> label_inst .)
+    TYPE_U          reduce using rule 11 (instruction -> label_inst .)
+    LABEL           reduce using rule 11 (instruction -> label_inst .)
+    $end            reduce using rule 11 (instruction -> label_inst .)
+
+
+state 12
+
+    (12) r_inst -> TYPE_R . REGISTER COMMA REGISTER COMMA REGISTER
+
+    REGISTER        shift and go to state 23
+
+
+state 13
+
+    (13) i_inst -> TYPE_I . REGISTER COMMA REGISTER COMMA IMMEDIATE
+
+    REGISTER        shift and go to state 24
+
+
+state 14
+
+    (14) i_inst -> TYPE_JI . REGISTER COMMA REGISTER COMMA IMMEDIATE
+
+    REGISTER        shift and go to state 25
+
+
+state 15
+
+    (15) li_inst -> TYPE_LI . REGISTER COMMA IMMEDIATE LPAREN REGISTER RPAREN
+
+    REGISTER        shift and go to state 26
+
+
+state 16
+
+    (16) j_inst -> TYPE_J . REGISTER COMMA LABEL
+
+    REGISTER        shift and go to state 27
+
+
+state 17
+
+    (21) label_inst -> LABEL . COLON
+
+    COLON           shift and go to state 28
+
+
+state 18
+
+    (17) ei_inst -> TYPE_EI .
+
+    TYPE_R          reduce using rule 17 (ei_inst -> TYPE_EI .)
+    TYPE_I          reduce using rule 17 (ei_inst -> TYPE_EI .)
+    TYPE_JI         reduce using rule 17 (ei_inst -> TYPE_EI .)
+    TYPE_LI         reduce using rule 17 (ei_inst -> TYPE_EI .)
+    TYPE_J          reduce using rule 17 (ei_inst -> TYPE_EI .)
+    TYPE_EI         reduce using rule 17 (ei_inst -> TYPE_EI .)
+    TYPE_S          reduce using rule 17 (ei_inst -> TYPE_EI .)
+    TYPE_B          reduce using rule 17 (ei_inst -> TYPE_EI .)
+    TYPE_U          reduce using rule 17 (ei_inst -> TYPE_EI .)
+    LABEL           reduce using rule 17 (ei_inst -> TYPE_EI .)
+    $end            reduce using rule 17 (ei_inst -> TYPE_EI .)
+
+
+state 19
+
+    (18) s_inst -> TYPE_S . REGISTER COMMA IMMEDIATE LPAREN REGISTER RPAREN
+
+    REGISTER        shift and go to state 29
+
+
+state 20
+
+    (19) b_inst -> TYPE_B . REGISTER COMMA REGISTER COMMA LABEL
+
+    REGISTER        shift and go to state 30
+
+
+state 21
+
+    (20) u_inst -> TYPE_U . REGISTER COMMA IMMEDIATE
+
+    REGISTER        shift and go to state 31
+
+
+state 22
+
+    (1) program -> instruction program .
+
+    $end            reduce using rule 1 (program -> instruction program .)
+
+
+state 23
+
+    (12) r_inst -> TYPE_R REGISTER . COMMA REGISTER COMMA REGISTER
+
+    COMMA           shift and go to state 32
+
+
+state 24
+
+    (13) i_inst -> TYPE_I REGISTER . COMMA REGISTER COMMA IMMEDIATE
+
+    COMMA           shift and go to state 33
+
+
+state 25
+
+    (14) i_inst -> TYPE_JI REGISTER . COMMA REGISTER COMMA IMMEDIATE
+
+    COMMA           shift and go to state 34
+
+
+state 26
+
+    (15) li_inst -> TYPE_LI REGISTER . COMMA IMMEDIATE LPAREN REGISTER RPAREN
+
+    COMMA           shift and go to state 35
+
+
+state 27
+
+    (16) j_inst -> TYPE_J REGISTER . COMMA LABEL
+
+    COMMA           shift and go to state 36
+
+
+state 28
+
+    (21) label_inst -> LABEL COLON .
+
+    TYPE_R          reduce using rule 21 (label_inst -> LABEL COLON .)
+    TYPE_I          reduce using rule 21 (label_inst -> LABEL COLON .)
+    TYPE_JI         reduce using rule 21 (label_inst -> LABEL COLON .)
+    TYPE_LI         reduce using rule 21 (label_inst -> LABEL COLON .)
+    TYPE_J          reduce using rule 21 (label_inst -> LABEL COLON .)
+    TYPE_EI         reduce using rule 21 (label_inst -> LABEL COLON .)
+    TYPE_S          reduce using rule 21 (label_inst -> LABEL COLON .)
+    TYPE_B          reduce using rule 21 (label_inst -> LABEL COLON .)
+    TYPE_U          reduce using rule 21 (label_inst -> LABEL COLON .)
+    LABEL           reduce using rule 21 (label_inst -> LABEL COLON .)
+    $end            reduce using rule 21 (label_inst -> LABEL COLON .)
+
+
+state 29
+
+    (18) s_inst -> TYPE_S REGISTER . COMMA IMMEDIATE LPAREN REGISTER RPAREN
+
+    COMMA           shift and go to state 37
+
+
+state 30
+
+    (19) b_inst -> TYPE_B REGISTER . COMMA REGISTER COMMA LABEL
+
+    COMMA           shift and go to state 38
+
+
+state 31
+
+    (20) u_inst -> TYPE_U REGISTER . COMMA IMMEDIATE
+
+    COMMA           shift and go to state 39
+
+
+state 32
+
+    (12) r_inst -> TYPE_R REGISTER COMMA . REGISTER COMMA REGISTER
+
+    REGISTER        shift and go to state 40
+
+
+state 33
+
+    (13) i_inst -> TYPE_I REGISTER COMMA . REGISTER COMMA IMMEDIATE
+
+    REGISTER        shift and go to state 41
+
+
+state 34
+
+    (14) i_inst -> TYPE_JI REGISTER COMMA . REGISTER COMMA IMMEDIATE
+
+    REGISTER        shift and go to state 42
+
+
+state 35
+
+    (15) li_inst -> TYPE_LI REGISTER COMMA . IMMEDIATE LPAREN REGISTER RPAREN
+
+    IMMEDIATE       shift and go to state 43
+
+
+state 36
+
+    (16) j_inst -> TYPE_J REGISTER COMMA . LABEL
+
+    LABEL           shift and go to state 44
+
+
+state 37
+
+    (18) s_inst -> TYPE_S REGISTER COMMA . IMMEDIATE LPAREN REGISTER RPAREN
+
+    IMMEDIATE       shift and go to state 45
+
+
+state 38
+
+    (19) b_inst -> TYPE_B REGISTER COMMA . REGISTER COMMA LABEL
+
+    REGISTER        shift and go to state 46
+
+
+state 39
+
+    (20) u_inst -> TYPE_U REGISTER COMMA . IMMEDIATE
+
+    IMMEDIATE       shift and go to state 47
+
+
+state 40
+
+    (12) r_inst -> TYPE_R REGISTER COMMA REGISTER . COMMA REGISTER
+
+    COMMA           shift and go to state 48
+
+
+state 41
+
+    (13) i_inst -> TYPE_I REGISTER COMMA REGISTER . COMMA IMMEDIATE
+
+    COMMA           shift and go to state 49
+
+
+state 42
+
+    (14) i_inst -> TYPE_JI REGISTER COMMA REGISTER . COMMA IMMEDIATE
+
+    COMMA           shift and go to state 50
+
+
+state 43
+
+    (15) li_inst -> TYPE_LI REGISTER COMMA IMMEDIATE . LPAREN REGISTER RPAREN
+
+    LPAREN          shift and go to state 51
+
+
+state 44
+
+    (16) j_inst -> TYPE_J REGISTER COMMA LABEL .
+
+    TYPE_R          reduce using rule 16 (j_inst -> TYPE_J REGISTER COMMA LABEL .)
+    TYPE_I          reduce using rule 16 (j_inst -> TYPE_J REGISTER COMMA LABEL .)
+    TYPE_JI         reduce using rule 16 (j_inst -> TYPE_J REGISTER COMMA LABEL .)
+    TYPE_LI         reduce using rule 16 (j_inst -> TYPE_J REGISTER COMMA LABEL .)
+    TYPE_J          reduce using rule 16 (j_inst -> TYPE_J REGISTER COMMA LABEL .)
+    TYPE_EI         reduce using rule 16 (j_inst -> TYPE_J REGISTER COMMA LABEL .)
+    TYPE_S          reduce using rule 16 (j_inst -> TYPE_J REGISTER COMMA LABEL .)
+    TYPE_B          reduce using rule 16 (j_inst -> TYPE_J REGISTER COMMA LABEL .)
+    TYPE_U          reduce using rule 16 (j_inst -> TYPE_J REGISTER COMMA LABEL .)
+    LABEL           reduce using rule 16 (j_inst -> TYPE_J REGISTER COMMA LABEL .)
+    $end            reduce using rule 16 (j_inst -> TYPE_J REGISTER COMMA LABEL .)
+
+
+state 45
+
+    (18) s_inst -> TYPE_S REGISTER COMMA IMMEDIATE . LPAREN REGISTER RPAREN
+
+    LPAREN          shift and go to state 52
+
+
+state 46
+
+    (19) b_inst -> TYPE_B REGISTER COMMA REGISTER . COMMA LABEL
+
+    COMMA           shift and go to state 53
+
+
+state 47
+
+    (20) u_inst -> TYPE_U REGISTER COMMA IMMEDIATE .
+
+    TYPE_R          reduce using rule 20 (u_inst -> TYPE_U REGISTER COMMA IMMEDIATE .)
+    TYPE_I          reduce using rule 20 (u_inst -> TYPE_U REGISTER COMMA IMMEDIATE .)
+    TYPE_JI         reduce using rule 20 (u_inst -> TYPE_U REGISTER COMMA IMMEDIATE .)
+    TYPE_LI         reduce using rule 20 (u_inst -> TYPE_U REGISTER COMMA IMMEDIATE .)
+    TYPE_J          reduce using rule 20 (u_inst -> TYPE_U REGISTER COMMA IMMEDIATE .)
+    TYPE_EI         reduce using rule 20 (u_inst -> TYPE_U REGISTER COMMA IMMEDIATE .)
+    TYPE_S          reduce using rule 20 (u_inst -> TYPE_U REGISTER COMMA IMMEDIATE .)
+    TYPE_B          reduce using rule 20 (u_inst -> TYPE_U REGISTER COMMA IMMEDIATE .)
+    TYPE_U          reduce using rule 20 (u_inst -> TYPE_U REGISTER COMMA IMMEDIATE .)
+    LABEL           reduce using rule 20 (u_inst -> TYPE_U REGISTER COMMA IMMEDIATE .)
+    $end            reduce using rule 20 (u_inst -> TYPE_U REGISTER COMMA IMMEDIATE .)
+
+
+state 48
+
+    (12) r_inst -> TYPE_R REGISTER COMMA REGISTER COMMA . REGISTER
+
+    REGISTER        shift and go to state 54
+
+
+state 49
+
+    (13) i_inst -> TYPE_I REGISTER COMMA REGISTER COMMA . IMMEDIATE
+
+    IMMEDIATE       shift and go to state 55
+
+
+state 50
+
+    (14) i_inst -> TYPE_JI REGISTER COMMA REGISTER COMMA . IMMEDIATE
+
+    IMMEDIATE       shift and go to state 56
+
+
+state 51
+
+    (15) li_inst -> TYPE_LI REGISTER COMMA IMMEDIATE LPAREN . REGISTER RPAREN
+
+    REGISTER        shift and go to state 57
+
+
+state 52
+
+    (18) s_inst -> TYPE_S REGISTER COMMA IMMEDIATE LPAREN . REGISTER RPAREN
+
+    REGISTER        shift and go to state 58
+
+
+state 53
+
+    (19) b_inst -> TYPE_B REGISTER COMMA REGISTER COMMA . LABEL
+
+    LABEL           shift and go to state 59
+
+
+state 54
+
+    (12) r_inst -> TYPE_R REGISTER COMMA REGISTER COMMA REGISTER .
+
+    TYPE_R          reduce using rule 12 (r_inst -> TYPE_R REGISTER COMMA REGISTER COMMA REGISTER .)
+    TYPE_I          reduce using rule 12 (r_inst -> TYPE_R REGISTER COMMA REGISTER COMMA REGISTER .)
+    TYPE_JI         reduce using rule 12 (r_inst -> TYPE_R REGISTER COMMA REGISTER COMMA REGISTER .)
+    TYPE_LI         reduce using rule 12 (r_inst -> TYPE_R REGISTER COMMA REGISTER COMMA REGISTER .)
+    TYPE_J          reduce using rule 12 (r_inst -> TYPE_R REGISTER COMMA REGISTER COMMA REGISTER .)
+    TYPE_EI         reduce using rule 12 (r_inst -> TYPE_R REGISTER COMMA REGISTER COMMA REGISTER .)
+    TYPE_S          reduce using rule 12 (r_inst -> TYPE_R REGISTER COMMA REGISTER COMMA REGISTER .)
+    TYPE_B          reduce using rule 12 (r_inst -> TYPE_R REGISTER COMMA REGISTER COMMA REGISTER .)
+    TYPE_U          reduce using rule 12 (r_inst -> TYPE_R REGISTER COMMA REGISTER COMMA REGISTER .)
+    LABEL           reduce using rule 12 (r_inst -> TYPE_R REGISTER COMMA REGISTER COMMA REGISTER .)
+    $end            reduce using rule 12 (r_inst -> TYPE_R REGISTER COMMA REGISTER COMMA REGISTER .)
+
+
+state 55
+
+    (13) i_inst -> TYPE_I REGISTER COMMA REGISTER COMMA IMMEDIATE .
+
+    TYPE_R          reduce using rule 13 (i_inst -> TYPE_I REGISTER COMMA REGISTER COMMA IMMEDIATE .)
+    TYPE_I          reduce using rule 13 (i_inst -> TYPE_I REGISTER COMMA REGISTER COMMA IMMEDIATE .)
+    TYPE_JI         reduce using rule 13 (i_inst -> TYPE_I REGISTER COMMA REGISTER COMMA IMMEDIATE .)
+    TYPE_LI         reduce using rule 13 (i_inst -> TYPE_I REGISTER COMMA REGISTER COMMA IMMEDIATE .)
+    TYPE_J          reduce using rule 13 (i_inst -> TYPE_I REGISTER COMMA REGISTER COMMA IMMEDIATE .)
+    TYPE_EI         reduce using rule 13 (i_inst -> TYPE_I REGISTER COMMA REGISTER COMMA IMMEDIATE .)
+    TYPE_S          reduce using rule 13 (i_inst -> TYPE_I REGISTER COMMA REGISTER COMMA IMMEDIATE .)
+    TYPE_B          reduce using rule 13 (i_inst -> TYPE_I REGISTER COMMA REGISTER COMMA IMMEDIATE .)
+    TYPE_U          reduce using rule 13 (i_inst -> TYPE_I REGISTER COMMA REGISTER COMMA IMMEDIATE .)
+    LABEL           reduce using rule 13 (i_inst -> TYPE_I REGISTER COMMA REGISTER COMMA IMMEDIATE .)
+    $end            reduce using rule 13 (i_inst -> TYPE_I REGISTER COMMA REGISTER COMMA IMMEDIATE .)
+
+
+state 56
+
+    (14) i_inst -> TYPE_JI REGISTER COMMA REGISTER COMMA IMMEDIATE .
+
+    TYPE_R          reduce using rule 14 (i_inst -> TYPE_JI REGISTER COMMA REGISTER COMMA IMMEDIATE .)
+    TYPE_I          reduce using rule 14 (i_inst -> TYPE_JI REGISTER COMMA REGISTER COMMA IMMEDIATE .)
+    TYPE_JI         reduce using rule 14 (i_inst -> TYPE_JI REGISTER COMMA REGISTER COMMA IMMEDIATE .)
+    TYPE_LI         reduce using rule 14 (i_inst -> TYPE_JI REGISTER COMMA REGISTER COMMA IMMEDIATE .)
+    TYPE_J          reduce using rule 14 (i_inst -> TYPE_JI REGISTER COMMA REGISTER COMMA IMMEDIATE .)
+    TYPE_EI         reduce using rule 14 (i_inst -> TYPE_JI REGISTER COMMA REGISTER COMMA IMMEDIATE .)
+    TYPE_S          reduce using rule 14 (i_inst -> TYPE_JI REGISTER COMMA REGISTER COMMA IMMEDIATE .)
+    TYPE_B          reduce using rule 14 (i_inst -> TYPE_JI REGISTER COMMA REGISTER COMMA IMMEDIATE .)
+    TYPE_U          reduce using rule 14 (i_inst -> TYPE_JI REGISTER COMMA REGISTER COMMA IMMEDIATE .)
+    LABEL           reduce using rule 14 (i_inst -> TYPE_JI REGISTER COMMA REGISTER COMMA IMMEDIATE .)
+    $end            reduce using rule 14 (i_inst -> TYPE_JI REGISTER COMMA REGISTER COMMA IMMEDIATE .)
+
+
+state 57
+
+    (15) li_inst -> TYPE_LI REGISTER COMMA IMMEDIATE LPAREN REGISTER . RPAREN
+
+    RPAREN          shift and go to state 60
+
+
+state 58
+
+    (18) s_inst -> TYPE_S REGISTER COMMA IMMEDIATE LPAREN REGISTER . RPAREN
+
+    RPAREN          shift and go to state 61
+
+
+state 59
+
+    (19) b_inst -> TYPE_B REGISTER COMMA REGISTER COMMA LABEL .
+
+    TYPE_R          reduce using rule 19 (b_inst -> TYPE_B REGISTER COMMA REGISTER COMMA LABEL .)
+    TYPE_I          reduce using rule 19 (b_inst -> TYPE_B REGISTER COMMA REGISTER COMMA LABEL .)
+    TYPE_JI         reduce using rule 19 (b_inst -> TYPE_B REGISTER COMMA REGISTER COMMA LABEL .)
+    TYPE_LI         reduce using rule 19 (b_inst -> TYPE_B REGISTER COMMA REGISTER COMMA LABEL .)
+    TYPE_J          reduce using rule 19 (b_inst -> TYPE_B REGISTER COMMA REGISTER COMMA LABEL .)
+    TYPE_EI         reduce using rule 19 (b_inst -> TYPE_B REGISTER COMMA REGISTER COMMA LABEL .)
+    TYPE_S          reduce using rule 19 (b_inst -> TYPE_B REGISTER COMMA REGISTER COMMA LABEL .)
+    TYPE_B          reduce using rule 19 (b_inst -> TYPE_B REGISTER COMMA REGISTER COMMA LABEL .)
+    TYPE_U          reduce using rule 19 (b_inst -> TYPE_B REGISTER COMMA REGISTER COMMA LABEL .)
+    LABEL           reduce using rule 19 (b_inst -> TYPE_B REGISTER COMMA REGISTER COMMA LABEL .)
+    $end            reduce using rule 19 (b_inst -> TYPE_B REGISTER COMMA REGISTER COMMA LABEL .)
+
+
+state 60
+
+    (15) li_inst -> TYPE_LI REGISTER COMMA IMMEDIATE LPAREN REGISTER RPAREN .
+
+    TYPE_R          reduce using rule 15 (li_inst -> TYPE_LI REGISTER COMMA IMMEDIATE LPAREN REGISTER RPAREN .)
+    TYPE_I          reduce using rule 15 (li_inst -> TYPE_LI REGISTER COMMA IMMEDIATE LPAREN REGISTER RPAREN .)
+    TYPE_JI         reduce using rule 15 (li_inst -> TYPE_LI REGISTER COMMA IMMEDIATE LPAREN REGISTER RPAREN .)
+    TYPE_LI         reduce using rule 15 (li_inst -> TYPE_LI REGISTER COMMA IMMEDIATE LPAREN REGISTER RPAREN .)
+    TYPE_J          reduce using rule 15 (li_inst -> TYPE_LI REGISTER COMMA IMMEDIATE LPAREN REGISTER RPAREN .)
+    TYPE_EI         reduce using rule 15 (li_inst -> TYPE_LI REGISTER COMMA IMMEDIATE LPAREN REGISTER RPAREN .)
+    TYPE_S          reduce using rule 15 (li_inst -> TYPE_LI REGISTER COMMA IMMEDIATE LPAREN REGISTER RPAREN .)
+    TYPE_B          reduce using rule 15 (li_inst -> TYPE_LI REGISTER COMMA IMMEDIATE LPAREN REGISTER RPAREN .)
+    TYPE_U          reduce using rule 15 (li_inst -> TYPE_LI REGISTER COMMA IMMEDIATE LPAREN REGISTER RPAREN .)
+    LABEL           reduce using rule 15 (li_inst -> TYPE_LI REGISTER COMMA IMMEDIATE LPAREN REGISTER RPAREN .)
+    $end            reduce using rule 15 (li_inst -> TYPE_LI REGISTER COMMA IMMEDIATE LPAREN REGISTER RPAREN .)
+
+
+state 61
+
+    (18) s_inst -> TYPE_S REGISTER COMMA IMMEDIATE LPAREN REGISTER RPAREN .
+
+    TYPE_R          reduce using rule 18 (s_inst -> TYPE_S REGISTER COMMA IMMEDIATE LPAREN REGISTER RPAREN .)
+    TYPE_I          reduce using rule 18 (s_inst -> TYPE_S REGISTER COMMA IMMEDIATE LPAREN REGISTER RPAREN .)
+    TYPE_JI         reduce using rule 18 (s_inst -> TYPE_S REGISTER COMMA IMMEDIATE LPAREN REGISTER RPAREN .)
+    TYPE_LI         reduce using rule 18 (s_inst -> TYPE_S REGISTER COMMA IMMEDIATE LPAREN REGISTER RPAREN .)
+    TYPE_J          reduce using rule 18 (s_inst -> TYPE_S REGISTER COMMA IMMEDIATE LPAREN REGISTER RPAREN .)
+    TYPE_EI         reduce using rule 18 (s_inst -> TYPE_S REGISTER COMMA IMMEDIATE LPAREN REGISTER RPAREN .)
+    TYPE_S          reduce using rule 18 (s_inst -> TYPE_S REGISTER COMMA IMMEDIATE LPAREN REGISTER RPAREN .)
+    TYPE_B          reduce using rule 18 (s_inst -> TYPE_S REGISTER COMMA IMMEDIATE LPAREN REGISTER RPAREN .)
+    TYPE_U          reduce using rule 18 (s_inst -> TYPE_S REGISTER COMMA IMMEDIATE LPAREN REGISTER RPAREN .)
+    LABEL           reduce using rule 18 (s_inst -> TYPE_S REGISTER COMMA IMMEDIATE LPAREN REGISTER RPAREN .)
+    $end            reduce using rule 18 (s_inst -> TYPE_S REGISTER COMMA IMMEDIATE LPAREN REGISTER RPAREN .)
+
