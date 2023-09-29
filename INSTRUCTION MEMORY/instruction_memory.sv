@@ -17,7 +17,7 @@ initial begin
 end
 
 always @(*) begin
-    instruction = memory[address]; // Asigna la instrucción según la dirección
+    instruction = memory[address >> 2]; // Asigna la instrucción según la dirección
 end
 
 endmodule

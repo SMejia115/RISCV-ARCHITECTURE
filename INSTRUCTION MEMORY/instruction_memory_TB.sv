@@ -25,19 +25,19 @@ module instruction_memory_TB;
         #10; // Retardo para que se actualice la dirección y se lea la instrucción
         $display("Dirección %d: Instrucción = %b", address, instruction);
 
-        address = 1;
-        #10;
-        $display("Dirección %d: Instrucción = %b", address, instruction);
-
         address = 4;
         #10;
         $display("Dirección %d: Instrucción = %b", address, instruction);
 
-        address = 7;
+        address = 8;
         #10;
         $display("Dirección %d: Instrucción = %b", address, instruction);
 
-        address = 5;
+        address = 12;
+        #10;
+        $display("Dirección %d: Instrucción = %b", address, instruction);
+
+        address = 16;
         #10;
         $display("Dirección %d: Instrucción = %b", address, instruction);
 
