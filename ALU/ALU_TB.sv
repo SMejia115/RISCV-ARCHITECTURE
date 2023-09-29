@@ -131,6 +131,22 @@ module alu_tb;
     operand2 = 5;
     func3 = 3'b101;
     subsra = 1;
+
+    #10;
+
+    //Prueba #15 - Shift Right Logical con negativo
+    operand1 = 32'b10010;
+    operand2 = -2;
+    func3 = 3'b101;
+    subsra = 0;
+
+    #10;
+
+    //Prueba #16 - Shift Left Logical con negativo
+    operand1 = 32'b10010;
+    operand2 = -2;
+    func3 = 3'b001;
+    subsra = 0;
     
 
 

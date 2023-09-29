@@ -46,7 +46,14 @@ module alu(
         3'b001: //Shift Left Logical
           result = shl_result;
         3'b010: //Set Less Than
-          result = lt_result;
+          if (operand1[31] == 1 && operand2[31] == 0)
+            result = 1;
+          else if (operand1[31] == 0 && operand2[31] == 1)
+            result = 0;
+          else if (operand1[31] == operand2[31])
+            result = lt_result;
+          else
+            result = 0;
         3'b011: //Set Less Than Unsigned
           result = lt_result;
         3'b100: //XOR
