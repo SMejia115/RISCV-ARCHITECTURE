@@ -34,43 +34,15 @@ module control_unit_tb;
     $dumpfile("control_unit_tb.vcd"); // Nombre del archivo VCD
     $dumpvars(0, control_unit_tb); // Guardar todas las señales
 
-    opcode = 7'b0110111;
-
-    funct3 = 3'b000;
-    funct7 = 7'b0000000;
-    #10
-
-    funct3 = 3'b000;
-    funct7 = 7'b0100000;
-    #10
-
-    funct3 = 3'b001;
-    funct7 = 7'b0000000;
-    #10
-
-    funct3 = 3'b010;
-    funct7 = 7'b0000000;
-    #10
-
-    funct3 = 3'b011;
-    funct7 = 7'b0000000;
-    #10
-
-    funct3 = 3'b100;
-    funct7 = 7'b0000000;
-    #10
-
-    funct3 = 3'b101;
-    funct7 = 7'b0000000;
-    #10
-
-    funct3 = 3'b110;
-    funct7 = 7'b0100000;
-    #10
-
-    funct3 = 3'b111;
-    funct7 = 7'b0000000;
-    #10
+    opcode = 7'b0110011; funct3 = 3'b010; funct7 = 7'b0100000; // Tipo R
+    #10 opcode = 7'b0010011; funct3 = 3'b100; funct7 = 7'b0100000; // Tipo I
+    #10 opcode = 7'b0000011; funct3 = 3'b101; // Tipo I Carga
+    #10 opcode = 7'b1100011; funct3 = 3'b110; // Tipo B
+    #10 opcode = 7'b1101111; // Tipo J
+    #10 opcode = 7'b0100011; funct3 = 3'b111; // Tipo S
+    #10 opcode = 7'b1100111; // Tipo I Salto
+    #10 opcode = 7'b0110111; // Tipo U - lui
+    #10 opcode = 7'b0010111; // Tipo U - auipc
 
     $finish;
   end
