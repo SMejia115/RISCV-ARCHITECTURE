@@ -5,8 +5,9 @@ module data_memory(
     input [2:0] dmctrl,
     output [31:0] datard
 );
-    reg [31:0] memory [0:1023];  // Memoria de datos (ejemplo: 1024 palabras de 32 bits)
+    reg [7:0] memory [0:4095];  // Memoria de datos (ejemplo: 1024 palabras de 32 bits)
 
+    //Efectuar cambios para guardar y cargar según el tamaño de memoria
     always @(*)
     begin
         case(dmctrl)
