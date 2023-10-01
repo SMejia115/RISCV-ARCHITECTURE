@@ -5,37 +5,41 @@ module data_memory(
     input [2:0] dmctrl,
     output [31:0] datard
 );
-    reg [7:0] memory [0:4095];  // Memoria de datos (ejemplo: 1024 palabras de 32 bits)
-
-    //Efectuar cambios para guardar y cargar según el tamaño de memoria
+    reg [7:0] memory [0:4095];  // Memoria de datos 
+    
     always @(*)
     begin
         case(dmctrl)
-            3'b000: // Carga o almacenamiento de byte
-                if (dmwr) // Write
-                    memory[address] <= {24'b0, datawr[7:0]};  // Escribir byte
-                else // Read
-                    datard = {24{memory[address][7]}, memory[address][7:0]};  // Leer byte
-            3'b001: // Carga o almacenamiento de media palabra
-                if (dmwr) // Write
-                    memory[address] <= {16'b0, datawr[15:0]};  // Escribir media palabra
+            3'b000: //Byte
+                if (dmwr) // Write (sb)
+                    memory[address] = {datawr[7:0]};  
+                else // Read (lb)
+                    datard = {24{memory[address][7]}, memory[address][7:0]};  //Se extiende el signo 
+            3'b001: // Half
+                if (dmwr) // Write (sh)
+                    memory[address] = {datawr[7:0]};  
+                    memory[address+1] = {datawr[15:8]};  
+                else// Read (lh)
+                    datard = {16{memory[address+1][7]}, memory[address+1][7:0], memory[address][7:0] }; // Se extiende el signo  
+            3'b010: // Word
+                if (dmwr)// Write (sw)
+                    memory[address] = datawr[7:0];
+                    memory[address+1] = datawr[15:8];
+                    memory[address+2] = datawr[23:16];
+                    memory[address+3] = datawr[31:24];  
                 else// Read
-                    datard = {16{memory[address][15]}, memory[address][15:0]};  // Leer media palabra
-            3'b010: // Carga o almacenamiento de palabra (word)
-                if (dmwr)// Write
-                    memory[address] <= datawr;  // Escribir palabra
-                else// Read
-                    datard = memory[address];  // Leer palabra
-            3'b100: // Carga o almacenamiento de byte sin signo
-                if (dmwr)// Write
-                    memory[address] <= {24'b0, datawr[7:0]};  // Escribir byte sin signo
-                else// Read
-                    datard = {24{1'b0}, datawr[7:0]};  // Leer byte sin signo
-            3'b101: // Carga o almacenamiento de media palabra sin signo
-                if (dmwr)// Write
-                    memory[address] <= {16'b0, datawr[15:0]};  // Escribir media palabra sin signo
+                    datard = {memory[address+3], memory[address+2], memory[address+1], memory[address]};  // Leer palabra
+            3'b100: // Unsigned Byte
+                if (dmwr)// Write (sb)
+                    memory[address] = datawr[7:0];  
+                else// Read (lbu)
+                    datard = {24{1'b0}, memory[address][7:0]};  // Se extiende con ceros
+            3'b101: // Unsigned Half
+                if (dmwr) // Write (sh)
+                    memory[address] = {datawr[7:0]};  
+                    memory[address+1] = {datawr[15:8]};
                 else  // Read
-                    datard = {16{1'b0}, datawr[15:0]};  // Leer media palabra sin signo
+                    datard = {16{1'b0}, memory[address+1][7:0], memory[address][7:0] }; // Se extiende con ceros
             default: // Otros casos no definidos
                 datard = 32'b0;  // Valor por defecto
         endcase
