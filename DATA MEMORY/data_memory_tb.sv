@@ -23,7 +23,7 @@ module tb_data_memory;
         address = 10;
         datawr = 16'b1010101010101010;
         dmwr = 1;
-        dmctrl = 3'b001;
+        dmctrl = 3'b000;
         #10;  // Esperar 10 unidades de tiempo
         $display("Prueba 1 - datawr: %b", datawr);
         $display("Prueba 1 - datard: %b", datard);
@@ -32,16 +32,11 @@ module tb_data_memory;
         address = 10;
         //datawr = 8'b10101010;
         dmwr = 0;
-        dmctrl = 3'b001;
+        dmctrl = 3'b000;
         #10;
         $display("Prueba 2 - datawr: %b", datawr);  
         $display("Prueba 2 - datard: %b", datard);
-        
-
-        
+           
         $finish;
     end
-
-    
-
 endmodule
