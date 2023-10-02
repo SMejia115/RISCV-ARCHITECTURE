@@ -2,6 +2,8 @@
 // Santiago Mejía Orejuela
 // Juan Pablo Garcia Montes
 
+
+
 module instruction_memory(
     //parameter size_memory = 1024, // Cantidad de palabras de memoria
     //parameter size_address = 10, // Número de bits de la dirección (10^2=1024)
