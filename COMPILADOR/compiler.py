@@ -213,7 +213,7 @@ if __name__ == '__main__':
   if (len(sys.argv) > 2):
     path_output = sys.argv[2]
   else:
-    path_output = '..\INSTRUCTION MEMORY\instructions.txt'
+    path_output = '..\MONOCYCLE\instructions.txt'
   f = open(path_output, 'w')
   f.write(output)
   f.close()
