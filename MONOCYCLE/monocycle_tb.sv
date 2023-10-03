@@ -17,10 +17,7 @@ module monocycle_tb;
   initial begin
     $dumpfile("monocycle_tb.vcd");
     $dumpvars(0, monocycle_tb);
-    #5;
-    clk = 1;
-    // forever #5 clk = ~clk;
-    #5;
+
     clk = 0;
     reset = 1;
     initial_address = 0;
@@ -30,7 +27,7 @@ module monocycle_tb;
     #40;
 
   //   $finish;
-  // end
+  end
 
 
 endmodule
