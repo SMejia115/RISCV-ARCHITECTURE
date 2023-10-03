@@ -1,6 +1,5 @@
 module monocycle_tb;
   reg clk;
-
   wire[31:0] instruction;
 
   monocycle dut (
@@ -11,16 +10,23 @@ module monocycle_tb;
   initial begin
     $dumpfile("monocycle.vcd");
     $dumpvars(0, monocycle_tb);
-    
+    #5;
+    clk = 1;
+    // forever #5 clk = ~clk;
+    #5;
     clk = 0;
-    forever #5 clk = ~clk;
+    #5;
+    clk = 1;
+    #5;
+    clk = 0;
+    // clk = 0;
   end
 
-  initial begin
-    #20;
+  // initial begin
+  //   #20;
 
-    $finish;
-  end
+  //   $finish;
+  // end
 
 
 endmodule

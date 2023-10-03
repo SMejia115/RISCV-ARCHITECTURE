@@ -442,6 +442,5 @@ module monocycle (
     .address(address),
     .instruction(instruction)
   );
-
   
 endmodule
