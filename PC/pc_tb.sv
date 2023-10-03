@@ -3,6 +3,8 @@
 module pc_tb;
   reg[31:0] next_address;
   reg clk;
+  reg reset;
+  reg[31:0] initial_address;
 
   wire[31:0] address;
 
@@ -10,6 +12,8 @@ module pc_tb;
   pc dut(
     .next_address(next_address),
     .clk(clk),
+    .reset(reset),
+    .initial_address(initial_address),
     .address(address)
   );
 
@@ -27,6 +31,17 @@ module pc_tb;
     #10 next_address = 32'h4;
     #10 next_address = 32'h8;
     #10 next_address = 32'hC;
+
+    #10;
+    next_address = 32'h10;
+    reset = 1;
+    initial_address = 32'h0;
+
+    #10;
+    reset = 0;
+    next_address = address + 4;
+
+    #10;
 
     $finish;
   end
