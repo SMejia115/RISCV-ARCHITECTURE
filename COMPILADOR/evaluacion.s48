@@ -1,53 +1,5 @@
-tipo_r:
-    add x2, t1, t0
-    sub a5, s4, t6
-    sll t0, a0, x20
-    srl s1, x8, x9
-    xor x4, sp, ra
-    and t3, t3, t0
-    or a1, a7, a2
-    sra x30, gp, tp
-    slt s8, s11, t5
-    sltu a3, sp, s5
-    
-tipo_i:
-    addi x6, s1, 281
-    slli t0, a0, 6
-    srli s1, x8, 5
-    xori x4, sp, -647
-    andi t3, t3, 72
-    ori a1, a7, -77
-    srai x30, gp, 22
-    slti s8, s11, 0
-    sltiu a3, sp, -12
-    jalr x0, ra, 0
-    
-tipo_i_l:
-    lb s8, 8(sp)
-    lh t2, 0(x7)
-    lw ra, -20(a4)
-    lbu x9, -4(t5)
-    lhu s9, 12(x31)
-    
-tipo_s:
-    sb s9, -4(x25)
-    sh t6, 0(gp)
-    sw x17, 32(a6)
-    
-tipo_b:
-    beq zero, zero, tipo_r
-    bne x24, a1, tipo_i
-    blt zero, s10, tipo_i_l
-    bge t4, t4, tipo_s
-    bltu s3, x11, tipo_b
-    bgeu x8, x8, tipo_j
-    
-tipo_j:
-    jal tp, main
-    
-tipo_u:
-    lui t6, 100
-    auipc x7, 200
-    
-main:
-    ecall
+addi x1, zero, 281
+addi x2, zero, 19
+add x3, x1, x2
+sw x3, 0(zero)
+lw x4, 0(zero)

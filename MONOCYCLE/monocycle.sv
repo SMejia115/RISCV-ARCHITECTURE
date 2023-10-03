@@ -9,10 +9,12 @@
 `include "../ALU/alu.sv"
 `include "../DECODER/decoder.sv"
 
+
 module monocycle (
   input clk,
   input reset,
-  input[31:0] initial_address
+  input[31:0] initial_address,
+  input tr
 );
 
   wire[31:0] NEXT_ADDRESS_PC;
@@ -44,6 +46,12 @@ module monocycle (
 
   wire[31:0] DATA_WRITE_REGISTER;
 
+  wire[31:0] A_DATA_ALU;
+  wire[31:0] B_DATA_ALU;
+  wire[31:0] RESULT_ALU;
+
+  wire[31:0] DATA_MEMORY_READ;
+
   sum4 sum4(
     .input_1(ADDRESS_PC),
     .output_32(NEXT_ADDRESS_PC)
@@ -73,14 +81,16 @@ module monocycle (
     .immdata(IMM_DATA)
   );
 
-  register_file register_file(
+  register_file register_file( //Poner en 1 si se quieren ver los registros.
     .clk(clk),
     .rs1(RS1),
     .rs2(RS2),
     .rd(RD),
     .data(DATA_WRITE_REGISTER),
     .rs1Data(REGISTER_DATA_1),
-    .rs2Data(REGISTER_DATA_2)
+    .rs2Data(REGISTER_DATA_2),
+    .tr(tr),
+    .writeEnable(RU_WRITE)
   );
 
   imm_unit imm_unit(
@@ -104,7 +114,44 @@ module monocycle (
     .ru_data_src(RU_DATA_SRC)
   );
 
-  
+  mux2to1 mux2to1_A(
+    .input_1(REGISTER_DATA_1),
+    .input_2(ADDRESS_PC),
+    .select(ALU_A_SRC),
+    .output_32(A_DATA_ALU)
+  );
+
+  mux2to1 mux2to1_B(
+    .input_1(REGISTER_DATA_2),
+    .input_2(IMM_EXT),
+    .select(ALU_B_SRC),
+    .output_32(B_DATA_ALU)
+  );
+
+  alu alu(
+    .operand1(A_DATA_ALU),
+    .operand2(B_DATA_ALU),
+    .func3(ALU_OP[2:0]),
+    .subsra(ALU_OP[3]),
+    .result(RESULT_ALU)
+  );
+
+
+  data_memory data_memory(
+    .address(RESULT_ALU),
+    .datawr(REGISTER_DATA_2),
+    .dmwr(DM_WRITE),
+    .dmctrl(DM_CTRL),
+    .datard(DATA_MEMORY_READ)
+  );
+
+  mux3to1 mux3to1(
+    .input_1(RESULT_ALU),
+    .input_2(DATA_MEMORY_READ),
+    .input_3(ADDRESS_PC),
+    .select(RU_DATA_SRC),
+    .output_32(DATA_WRITE_REGISTER)
+  );
 
   
 endmodule

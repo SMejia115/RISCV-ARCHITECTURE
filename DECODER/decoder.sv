@@ -31,6 +31,16 @@ module decoder(
         rd = instruction[11:7];
 
         immdata = instruction[31:7];
+
+        // $display("opcode = %b", opcode);
+        // $display("funct3 = %b", funct3);
+        // $display("funct7 = %b", funct7);
+        // $display("rs1 = %b", rs1);
+        // $display("rs2 = %b", rs2);
+        // $display("rd = %b", rd);
+        // $display("immdata = %b", immdata);
+
+
     end
 
 endmodule
