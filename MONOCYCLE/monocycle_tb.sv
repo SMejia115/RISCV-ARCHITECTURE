@@ -3,11 +3,8 @@ module monocycle_tb;
   reg reset;
   reg[31:0] initial_address;
 
-  wire[31:0] instruction;
-
   monocycle dut (
     .clk(clk),
-    .instruction(instruction),
     .reset(reset),
     .initial_address(initial_address)
   );
@@ -26,7 +23,7 @@ module monocycle_tb;
 
     #40;
 
-  //   $finish;
+    $finish;
   end
 
 

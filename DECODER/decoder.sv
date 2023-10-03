@@ -1,7 +1,7 @@
 module decoder(
-  input [32:0] instruction,
+  input [31:0] instruction,
 
-  output [4:0] opcode,
+  output [6:0] opcode,
   output [2:0] funct3,
   output [6:0] funct7,
   output [4:0] rs1,
@@ -11,7 +11,7 @@ module decoder(
 
 );
 
-  reg [4:0] opcode;
+  reg [6:0] opcode;
   reg [2:0] funct3;
   reg [6:0] funct7;
   reg [4:0] rs1;

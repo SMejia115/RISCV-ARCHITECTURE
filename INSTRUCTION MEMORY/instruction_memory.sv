@@ -15,10 +15,10 @@ module instruction_memory #(
     reg [31:0] memory [size_memory-1:0]; // Arreglo para almacenar las instrucciones
 
 initial begin
-    $display("Se entra al instruction memory");
+    // $display("Se entra al instruction memory");
     $readmemb("instructions.txt", memory); // Carga las instrucciones desde el archivo
-    $display("Se leen las instrucciones");
-    $display("Instrucción 0: %b", memory[0]);
+    // $display("Se leen las instrucciones");
+    // $display("Instrucción 0: %b", memory[0]);
 end
 
     always @(*) begin
