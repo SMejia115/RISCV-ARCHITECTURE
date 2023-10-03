@@ -1,0 +1,135 @@
+$date
+	Mon Oct 02 19:12:27 2023
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module monocycle_tb $end
+$var wire 32 ! instruction [31:0] $end
+$var reg 1 " clk $end
+$var reg 32 # initial_address [31:0] $end
+$var reg 1 $ reset $end
+$scope module dut $end
+$var wire 1 " clk $end
+$var wire 32 % initial_address [31:0] $end
+$var wire 1 $ reset $end
+$var wire 32 & next_address [31:0] $end
+$var wire 32 ' instruction [31:0] $end
+$var wire 32 ( address [31:0] $end
+$scope module instruction_memory $end
+$var wire 32 ) address [31:0] $end
+$var parameter 32 * size_address $end
+$var parameter 32 + size_memory $end
+$var reg 32 , instruction [31:0] $end
+$upscope $end
+$scope module program_counter $end
+$var wire 1 " clk $end
+$var wire 32 - initial_address [31:0] $end
+$var wire 1 $ reset $end
+$var wire 32 . next_address [31:0] $end
+$var reg 32 / address [31:0] $end
+$upscope $end
+$scope module sum4 $end
+$var wire 32 0 input_1 [31:0] $end
+$var reg 32 1 output_32 [31:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+b10000000000 +
+b100000 *
+$end
+#0
+$dumpvars
+bx 1
+bx 0
+bx /
+bx .
+b0 -
+bx ,
+bx )
+bx (
+bx '
+bx &
+b0 %
+1$
+b0 #
+0"
+bx !
+$end
+#5
+b10100110000000100110011 !
+b10100110000000100110011 '
+b10100110000000100110011 ,
+b100 &
+b100 .
+b100 1
+b0 (
+b0 )
+b0 /
+b0 0
+1"
+#10
+0"
+0$
+#15
+b1000001111110100000011110110011 !
+b1000001111110100000011110110011 '
+b1000001111110100000011110110011 ,
+b1000 &
+b1000 .
+b1000 1
+b100 (
+b100 )
+b100 /
+b100 0
+1"
+#20
+0"
+#25
+b1010001010001001010110011 !
+b1010001010001001010110011 '
+b1010001010001001010110011 ,
+b1100 &
+b1100 .
+b1100 1
+b1000 (
+b1000 )
+b1000 /
+b1000 0
+1"
+#30
+0"
+#35
+b100101000101010010110011 !
+b100101000101010010110011 '
+b100101000101010010110011 ,
+b10000 &
+b10000 .
+b10000 1
+b1100 (
+b1100 )
+b1100 /
+b1100 0
+1"
+#40
+0"
+#45
+b100010100001000110011 !
+b100010100001000110011 '
+b100010100001000110011 ,
+b10100 &
+b10100 .
+b10100 1
+b10000 (
+b10000 )
+b10000 /
+b10000 0
+1"
+#50
+0"

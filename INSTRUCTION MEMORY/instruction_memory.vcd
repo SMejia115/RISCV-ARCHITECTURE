@@ -1,5 +1,5 @@
 $date
-	Fri Sep 29 14:56:25 2023
+	Mon Oct 02 18:04:56 2023
 $end
 $version
 	Icarus Verilog
@@ -12,38 +12,42 @@ $var wire 32 ! instruction [31:0] $end
 $var reg 10 " address [9:0] $end
 $scope module dut $end
 $var wire 10 # address [9:0] $end
-$var reg 32 $ instruction [31:0] $end
+$var parameter 32 $ size_address $end
+$var parameter 32 % size_memory $end
+$var reg 32 & instruction [31:0] $end
 $upscope $end
 $upscope $end
 $enddefinitions $end
 $comment Show the parameter values. $end
 $dumpall
+b10000000000 %
+b1010 $
 $end
 #0
 $dumpvars
-b10100110000000100110011 $
+b10100110000000100110011 &
 b0 #
 b0 "
 b10100110000000100110011 !
 $end
 #10
 b1000001111110100000011110110011 !
-b1000001111110100000011110110011 $
+b1000001111110100000011110110011 &
 b100 "
 b100 #
 #20
 b1010001010001001010110011 !
-b1010001010001001010110011 $
+b1010001010001001010110011 &
 b1000 "
 b1000 #
 #30
 b100101000101010010110011 !
-b100101000101010010110011 $
+b100101000101010010110011 &
 b1100 "
 b1100 #
 #40
 b100010100001000110011 !
-b100010100001000110011 $
+b100010100001000110011 &
 b10000 "
 b10000 #
 #50
