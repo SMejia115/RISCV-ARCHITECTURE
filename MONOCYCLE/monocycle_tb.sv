@@ -23,7 +23,7 @@ module monocycle_tb;
 
     #10 reset = 0;
 
-    #40 tr = 1;
+    #50 tr = 1;
 
     #6;
 

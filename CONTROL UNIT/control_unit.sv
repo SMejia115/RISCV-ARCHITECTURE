@@ -67,7 +67,7 @@ module control_unit (
         alu_b_src = 1'b1;
         dm_write = 1'b0;
         dm_ctrl = 3'bxxx;
-        br_op = funct3;
+        br_op = {2'b01, funct3};
         ru_data_src = 2'bxx;
       end
       7'b1101111: begin // Tipo J
