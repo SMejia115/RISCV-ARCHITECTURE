@@ -8,6 +8,7 @@
 `include "../CONTROL UNIT/control_unit.sv"
 `include "../ALU/alu.sv"
 `include "../DECODER/decoder.sv"
+`include "../BRANCH UNIT/branch_unit.sv"
 
 
 module monocycle (
@@ -20,6 +21,7 @@ module monocycle (
   wire[31:0] NEXT_ADDRESS_PC;
   wire[31:0] ADDRESS_PC;
   wire[31:0] INSTRUCTION;
+  wire[31:0] PC_PLUS_4;
 
   wire[6:0] OPCODE;
   wire[2:0] FUNCT3;
@@ -50,11 +52,13 @@ module monocycle (
   wire[31:0] B_DATA_ALU;
   wire[31:0] RESULT_ALU;
 
+  wire NEXT_PC_SRC;
+
   wire[31:0] DATA_MEMORY_READ;
 
   sum4 sum4(
     .input_1(ADDRESS_PC),
-    .output_32(NEXT_ADDRESS_PC)
+    .output_32(PC_PLUS_4)
   );
 
   instruction_memory #(1024, 32) instruction_memory(
@@ -136,6 +140,19 @@ module monocycle (
     .result(RESULT_ALU)
   );
 
+  branch_unit branch_unit(
+    .rs1(REGISTER_DATA_1),
+    .rs2(REGISTER_DATA_2),
+    .br_op(BR_OP),
+    .jump(NEXT_PC_SRC)
+  );
+
+  mux2to1 mux2to1_PC(
+    .input_1(PC_PLUS_4),
+    .input_2(RESULT_ALU),
+    .select(NEXT_PC_SRC),
+    .output_32(NEXT_ADDRESS_PC)
+  );
 
   data_memory data_memory(
     .address(RESULT_ALU),
