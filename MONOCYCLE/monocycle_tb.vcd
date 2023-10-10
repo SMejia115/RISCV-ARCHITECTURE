@@ -1,5 +1,5 @@
 $date
-	Mon Oct 02 22:12:46 2023
+	Tue Oct 03 00:22:10 2023
 $end
 $version
 	Icarus Verilog
@@ -513,4 +513,134 @@ b1100 s
 b1100 w
 b1100 !"
 1!
-#36
+#40
+0!
+#45
+b100101100 9
+b100101100 Z
+b100101100 q
+b1 '
+b1 V
+b1 r
+06
+b0 1
+b0 U
+b0 d
+1&
+b1000100 3
+b1000100 ^
+b1000100 c
+b100 -
+b100 `
+b100 y
+b0 +
+b0 Y
+b0 n
+b0 }
+b0 (
+b0 b
+b0 |
+b11 .
+b11 O
+b11 _
+b10001000000011 0
+b10001000000011 [
+b10001000000011 i
+b10100 /
+b10100 v
+b10100 ""
+b100000 ~
+b10000 @
+b10000 f
+b10000 j
+b10000 s
+b10000 w
+b10000 !"
+1!
+#50
+0!
+#55
+bx 8
+bx t
+bx x
+bx A
+bx 9
+bx Z
+bx q
+bx :
+bx J
+bx o
+bx E
+bx C
+bx *
+bx N
+bx W
+bx p
+bx 2
+bx e
+bx m
+bx G
+bx H
+bx I
+b0x L
+bx M
+bx F
+bx <
+bx K
+bx l
+bx 3
+bx ^
+bx c
+bx -
+bx `
+bx y
+bx +
+bx Y
+bx n
+bx }
+bx (
+bx b
+bx |
+bx ,
+bx k
+bx {
+bx )
+bx a
+bx z
+bx 4
+bx P
+bx ]
+bx 5
+bx Q
+bx \
+bx .
+bx O
+bx _
+bx 0
+bx [
+bx i
+b11000 /
+b11000 v
+b11000 ""
+b100000 ~
+b10100 @
+b10100 f
+b10100 j
+b10100 s
+b10100 w
+b10100 !"
+1!
+#60
+0!
+#65
+b11100 /
+b11100 v
+b11100 ""
+b0 ~
+b11000 @
+b11000 f
+b11000 j
+b11000 s
+b11000 w
+b11000 !"
+1!

@@ -14,7 +14,7 @@ module monocycle (
   input clk,
   input reset,
   input[31:0] initial_address,
-  input tr
+  input tr //Poner en 1 tr si se quieren ver los registros.
 );
 
   wire[31:0] NEXT_ADDRESS_PC;
@@ -81,7 +81,7 @@ module monocycle (
     .immdata(IMM_DATA)
   );
 
-  register_file register_file( //Poner en 1 si se quieren ver los registros.
+  register_file register_file( //Poner en 1 tr si se quieren ver los registros.
     .clk(clk),
     .rs1(RS1),
     .rs2(RS2),
