@@ -165,7 +165,7 @@ module monocycle (
   mux3to1 mux3to1(
     .input_1(RESULT_ALU),
     .input_2(DATA_MEMORY_READ),
-    .input_3(ADDRESS_PC),
+    .input_3(PC_PLUS_4),
     .select(RU_DATA_SRC),
     .output_32(DATA_WRITE_REGISTER)
   );

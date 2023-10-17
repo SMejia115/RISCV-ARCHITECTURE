@@ -104,8 +104,8 @@ module control_unit (
         ru_data_src = 2'b10;
       end
       7'b0110111: begin // Tipo U - lui
-        ru_write = 1'b0;
-        alu_op = 4'b0111;
+        ru_write = 1'b1;
+        alu_op = 4'b0001;
         imm_src = 3'b010;
         alu_a_src = 1'bx;
         alu_b_src = 1'b1;
@@ -115,8 +115,8 @@ module control_unit (
         ru_data_src = 2'b00;
       end 
       7'b0010111: begin // Tipo U - auipc
-        ru_write = 1'b0;
-        alu_op = 4'b0111;
+        ru_write = 1'b1;
+        alu_op = 4'b0001;
         imm_src = 3'b010;
         alu_a_src = 1'bx;
         alu_b_src = 1'b1;

@@ -1,7 +1,9 @@
-addi x1, zero, 281
-addi x2, zero, 19
-jump:
-add x3, x1, x2
-sw x3, 0(zero)
-lw x4, 0(zero)
-bge x1, x2, jump
+# jal x1, jump
+# addi x2, x1, 1
+# jump:
+#     add x3, zero, x1
+#     jalr x4, x1, 0
+#     addi x5, zero, 55
+
+lui x1, 123
+auipc x2, 15

@@ -21,9 +21,10 @@ module monocycle_tb;
     reset = 1;
     initial_address = 0;
 
-    #10 reset = 0;
+    #10; 
+    reset = 0;
 
-    #50 tr = 1;
+    #10 tr = 1;
 
     #6;
 
