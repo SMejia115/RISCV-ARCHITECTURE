@@ -1,5 +1,6 @@
 from plyplus import Grammar
 from MIPSCodeEmitter import MIPSCodeEmitter
+from RISCV32CodeEmitter import RISCV32CodeEmitter
 from CodeGenerator import CodeGenerator
 import sys
 
@@ -16,7 +17,8 @@ if __name__ == '__main__':
                     ast = Grammar(grm, auto_filter_tokens=False).parse(scode)
                     #ast.to_png_with_pydot('ast.png')
                     #TDVisitor(ast)
-                    ce = MIPSCodeEmitter(oc)
-                    cg = CodeGenerator(ce, True)
+                    # ce = MIPSCodeEmitter(oc)
+                    ce = RISCV32CodeEmitter(oc)
+                    cg = CodeGenerator(ce, False)
                     cg.visit(ast)
                     # print(ast)

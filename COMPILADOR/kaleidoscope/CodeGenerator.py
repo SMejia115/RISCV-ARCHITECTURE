@@ -49,8 +49,7 @@ class CodeGenerator(object):
 
     def program(self, tree):
         #print("Program*- {}".format(tree))
-        if self.useSpim:
-            self.dataHeader()
+        self.dataHeader()
 
         for funcdef in tree.tail[:-1]:
             self.visit(funcdef)
@@ -215,11 +214,11 @@ class CodeGenerator(object):
     #############################
     def dataHeader(self):
         ce = self.ce
-        ce.raw(".data");
-        ce.raw("exit_msg: .asciiz \"Program finished:\\n\"")
-        ce.raw("newline: .asciiz \"\\n\"")
-        ce.raw(".text")
-        ce.raw(".globl main")
+        # ce.raw(".data")
+        # ce.raw("exit_msg: .asciiz \"Program finished:\\n\"")
+        # ce.raw("newline: .asciiz \"\\n\"")
+        # ce.raw(".text")
+        ce.b('main')
 
     def exit(self):
         ce = self.ce
