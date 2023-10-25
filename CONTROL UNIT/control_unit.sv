@@ -6,7 +6,7 @@ module control_unit (
   output ru_write,
   output[3:0] alu_op,
   output[2:0] imm_src,
-  output alu_a_src,
+  output[1:0] alu_a_src,
   output alu_b_src,
   output dm_write,
   output[2:0] dm_ctrl,
@@ -17,7 +17,7 @@ module control_unit (
   reg ru_write;
   reg[3:0] alu_op;
   reg[2:0] imm_src;
-  reg alu_a_src;
+  reg[1:0] alu_a_src;
   reg alu_b_src;
   reg dm_write;
   reg[2:0] dm_ctrl;
@@ -30,7 +30,7 @@ module control_unit (
         ru_write = 1'b1;
         alu_op = {funct7[5], funct3};
         imm_src = 3'bxxx;
-        alu_a_src = 1'b0;
+        alu_a_src = 2'b00;
         alu_b_src = 1'b0;
         dm_write = 1'b0;
         dm_ctrl = 3'bxxx;
@@ -41,7 +41,7 @@ module control_unit (
         ru_write = 1'b1;
         alu_op = {funct7[5], funct3};
         imm_src = 3'b000;
-        alu_a_src = 1'b0;
+        alu_a_src = 2'b00;
         alu_b_src = 1'b1;
         dm_write = 1'b0;
         dm_ctrl = 3'bxxx;
@@ -52,7 +52,7 @@ module control_unit (
         ru_write = 1'b1;
         alu_op = 4'b0000;
         imm_src = 3'b000;
-        alu_a_src = 1'b0;
+        alu_a_src = 2'b00;
         alu_b_src = 1'b1;
         dm_write = 1'b0;
         dm_ctrl = funct3;
@@ -63,7 +63,7 @@ module control_unit (
         ru_write = 1'b0;
         alu_op = 4'b0000;
         imm_src = 3'b101;
-        alu_a_src = 1'b1;
+        alu_a_src = 2'b01;
         alu_b_src = 1'b1;
         dm_write = 1'b0;
         dm_ctrl = 3'bxxx;
@@ -74,7 +74,7 @@ module control_unit (
         ru_write = 1'b1;
         alu_op = 4'b0000;
         imm_src = 3'b110;
-        alu_a_src = 1'b1;
+        alu_a_src = 2'b01;
         alu_b_src = 1'b1;
         dm_write = 1'b0;
         dm_ctrl = 3'bxxx;
@@ -85,7 +85,7 @@ module control_unit (
         ru_write = 1'b0;
         alu_op = 4'b0000;
         imm_src = 3'b001;
-        alu_a_src = 1'b0;
+        alu_a_src = 2'b00;
         alu_b_src = 1'b1;
         dm_write = 1'b1;
         dm_ctrl = funct3;
@@ -96,7 +96,7 @@ module control_unit (
         ru_write = 1'b1;
         alu_op = 4'b0000;
         imm_src = 3'b000;
-        alu_a_src = 1'b0;
+        alu_a_src = 2'b00;
         alu_b_src = 1'b1;
         dm_write = 1'b0;
         dm_ctrl = 3'bxxx;
@@ -105,9 +105,9 @@ module control_unit (
       end
       7'b0110111: begin // Tipo U - lui
         ru_write = 1'b1;
-        alu_op = 4'b0001;
+        alu_op = 4'b0000;
         imm_src = 3'b010;
-        alu_a_src = 1'bx;
+        alu_a_src = 2'b10;
         alu_b_src = 1'b1;
         dm_write = 1'b0;
         dm_ctrl = 3'bxxx;
@@ -116,9 +116,9 @@ module control_unit (
       end 
       7'b0010111: begin // Tipo U - auipc
         ru_write = 1'b1;
-        alu_op = 4'b0001;
+        alu_op = 4'b0000;
         imm_src = 3'b010;
-        alu_a_src = 1'bx;
+        alu_a_src = 2'b01;
         alu_b_src = 1'b1;
         dm_write = 1'b0;
         dm_ctrl = 3'bxxx;

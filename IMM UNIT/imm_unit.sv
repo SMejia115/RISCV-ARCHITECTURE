@@ -16,7 +16,7 @@ module imm_unit(
             3'b101: // B-TYPE
                 immext = {{20{imm[24]}},imm[0], imm[23:18], imm[4:1], 1'b0};
             3'b010: // U-TYPE
-                immext = {{12{imm[24]}}, imm[24:5]}; 
+                immext = {imm[24:5], 12'b0}; 
             3'b110: // J-TYPE
                 immext = {{12{imm[24]}}, imm[12:5],imm[13],imm[23:14], 1'b0};
             default:

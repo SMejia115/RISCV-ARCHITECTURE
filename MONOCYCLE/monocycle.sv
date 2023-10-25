@@ -39,7 +39,7 @@ module monocycle (
   wire RU_WRITE;
   wire[3:0] ALU_OP;
   wire[2:0] IMM_SRC;
-  wire ALU_A_SRC;
+  wire[1:0] ALU_A_SRC;
   wire ALU_B_SRC;
   wire DM_WRITE;
   wire[2:0] DM_CTRL;
@@ -48,6 +48,7 @@ module monocycle (
 
   wire[31:0] DATA_WRITE_REGISTER;
 
+  reg[31:0] ZERO_ALU_A_SRC = 0;
   wire[31:0] A_DATA_ALU;
   wire[31:0] B_DATA_ALU;
   wire[31:0] RESULT_ALU;
@@ -118,9 +119,10 @@ module monocycle (
     .ru_data_src(RU_DATA_SRC)
   );
 
-  mux2to1 mux2to1_A(
+  mux3to1 mux3to1_A(
     .input_1(REGISTER_DATA_1),
     .input_2(ADDRESS_PC),
+    .input_3(ZERO_ALU_A_SRC),
     .select(ALU_A_SRC),
     .output_32(A_DATA_ALU)
   );
