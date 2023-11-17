@@ -2,8 +2,8 @@
 # addi x2, x1, 1
 # jump:
 #     add x3, zero, x1
-#     jalr x4, x1, 0
-#     addi x5, zero, 55
+#    jalr x4, x1, 0
+    addi x5, zero, 55
 
 lui x1, 123
 auipc x2, 15
