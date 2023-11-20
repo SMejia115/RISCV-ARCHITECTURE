@@ -9,6 +9,10 @@
 `include "../ALU/alu.sv"
 `include "../DECODER/decoder.sv"
 `include "../BRANCH UNIT/branch_unit.sv"
+`include "../PIPELINE COMPONENTS/if_de.sv"
+`include "../PIPELINE COMPONENTS/de_ex.sv"
+`include "../PIPELINE COMPONENTS/ex_me.sv"
+`include "../PIPELINE COMPONENTS/me_wb.sv"
 
 
 module pipeline (
@@ -57,6 +61,118 @@ module pipeline (
 
   wire[31:0] DATA_MEMORY_READ;
 
+  /*Pipeline wires*/
+
+  wire[31:0] ADDRESS_PC_DE;
+  wire[31:0] INSTRUCTION_DE;
+  wire[31:0] PC_PLUS_4_DE;
+
+
+  wire[31:0] PC_PLUS_4_EX;
+  wire[31:0] ADDRESS_PC_DE_EX;
+  wire[31:0] REGISTER_DATA_1_EX;
+  wire[31:0] REGISTER_DATA_2_EX;
+  wire[31:0] IMM_EXT_EX;
+  wire[4:0] RD_EX;
+  wire[3:0] ALU_OP_EX;
+  wire[1:0] ALU_A_SRC_EX;
+  wire ALU_B_SRC_EX;
+  wire DM_WRITE_EX;
+  wire[2:0] DM_CTRL_EX;
+  wire[4:0] BR_OP_EX;
+  wire[1:0] RU_DATA_SRC_EX;
+
+
+  wire[31:0] PC_PLUS_4_ME;
+  wire[31:0] RESULT_ALU_ME;
+  wire[31:0] REGISTER_DATA_2_ME;
+  wire[4:0] RD_ME;
+  wire DM_WRITE_ME;
+  wire[2:0] DM_CTRL_ME;
+  wire[1:0] RU_DATA_SRC_ME;
+
+  /*----------------------------------------------------------*/
+  /*---------------------PIPELINE COMPONENTS-------------------*/
+
+  if_de if_de(
+    .incrementPCIn(NEXT_ADDRESS_PC),
+    .PCIn(ADDRESS_PC),
+    .instructionIn(INSTRUCTION),
+    .clk(clk),
+    .PCOut(ADDRESS_PC_DE),
+    .instructionOut(INSTRUCTION_DE),
+    .incrementPCOut(PC_PLUS_4_DE)
+  );
+
+  de_ex de_ex(
+    .incrementPCIn(PC_PLUS_4_DE),
+    .PCIn(ADDRESS_PC_DE),
+    .RS1In(REGISTER_DATA_1),
+    .RS2In(REGISTER_DATA_2),
+    .immExtIn(IMM_EXT),
+    .rdIn(RD),
+    .alu_opIn(ALU_OP),
+    .alu_a_srcIn(ALU_A_SRC),
+    .alu_b_srcIn(ALU_B_SRC),
+    .dm_writeIn(DM_WRITE),
+    .dm_ctrlIn(DM_CTRL),
+    .br_opIn(BR_OP),
+    .ru_data_srcIn(RU_DATA_SRC),
+    .clk(clk),
+
+/*OUTPUT*/
+    .incrementPCOut(PC_PLUS_4_EX),
+    .PCOut(ADDRESS_PC_DE_EX),
+    .RS1Out(REGISTER_DATA_1_EX),
+    .RS2Out(REGISTER_DATA_2_EX),
+    .immExtOut(IMM_EXT_EX),
+    .rdOut(RD_EX),
+    .alu_opOut(ALU_OP_EX),
+    .alu_a_srcOut(ALU_A_SRC_EX),
+    .alu_b_srcOut(ALU_B_SRC_EX),
+    .dm_writeOut(DM_WRITE_EX),
+    .dm_ctrlOut(DM_CTRL_EX),
+    .br_opOut(BR_OP_EX),
+    .ru_data_srcOut(RU_DATA_SRC_EX)
+  );
+  
+  ex_me ex_me(
+    .incrementPCIn(PC_PLUS_4_EX),
+    .ALUResIn(RESULT_ALU),
+    .RS2In(REGISTER_DATA_2),
+    .rdIn(RD),
+    .dm_writeIn(DM_WRITE),
+    .dm_ctrlIn(DM_CTRL),
+    .ru_data_srcIn(RU_DATA_SRC),
+    .clk(clk),
+
+    .incrementPCOut(PC_PLUS_4_ME),
+    .ALUResOut(RESULT_ALU_ME),
+    .RS2Out(REGISTER_DATA_2_ME),
+    .rdOut(RD_ME),
+    .dm_writeOut(DM_WRITE_ME),
+    .dm_ctrlOut(DM_CTRL_ME),
+    .ru_data_srcOut(RU_DATA_SRC_ME)
+  );
+
+  me_wb me_wb(
+    .incrementPCIn(PC_PLUS_4_ME),
+    .ALUResIn(RESULT_ALU_ME),
+    .DMDataRdIn(DATA_MEMORY_READ),
+    .rdIn(RD_ME),
+    .ru_data_srcIn(RU_DATA_SRC_ME),
+    .clk(clk),
+
+    .incrementPCOut(PC_PLUS_4),
+    .ALUResOut(RESULT_ALU),
+    .DMDataRdOut(DATA_MEMORY_READ),
+    .rdOut(RD),
+    .ru_data_srcOut(RU_DATA_SRC)
+  );
+
+
+
+  /*----------------------------------------------------------*/
   sum4 sum4(
     .input_1(ADDRESS_PC),
     .output_32(PC_PLUS_4)
@@ -76,7 +192,7 @@ module pipeline (
   );
 
   decoder decoder(
-    .instruction(INSTRUCTION),
+    .instruction(INSTRUCTION_DE),
     .opcode(OPCODE),
     .funct3(FUNCT3),
     .funct7(FUNCT7),

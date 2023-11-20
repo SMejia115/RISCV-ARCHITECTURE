@@ -1,8 +1,8 @@
 /*Intruction fetch - Decode instruction component*/
 module if_de(
-  input[31:0] incrementPCIn,
-  input[31:0] PCIn,
-  input[31:0] instructionIn,
+  input [31:0] incrementPCIn,
+  input [31:0] PCIn,
+  input [31:0] instructionIn,
   input clk,
 
   output reg[31:0] PCOut,
