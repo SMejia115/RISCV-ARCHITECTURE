@@ -8,6 +8,7 @@ module ex_me(
   input dm_writeIn,
   input[2:0] dm_ctrlIn,
   input[1:0] ru_data_srcIn,
+  input ru_writeIn,
   input clk,
 
   output reg[31:0] incrementPCOut,
@@ -17,7 +18,9 @@ module ex_me(
   /*Control Unit Outputs*/
   output reg dm_writeOut,
   output reg[2:0] dm_ctrlOut,
-  output reg[1:0] ru_data_srcOut
+  output reg[1:0] ru_data_srcOut,
+  output reg ru_writeOut
+
 );
 
 always @(posedge clk) begin
@@ -29,6 +32,7 @@ always @(posedge clk) begin
   dm_writeOut = dm_writeIn;
   dm_ctrlOut = dm_ctrlIn;
   ru_data_srcOut = ru_data_srcIn;
+  ru_writeOut = ru_writeIn;
   
 end
   

@@ -5,6 +5,10 @@ module branch_unit (
 
   output reg jump
 );
+
+  initial begin
+    jump = 0;
+  end 
   
   always @(*) begin
     if (br_op[4] == 1)
@@ -38,6 +42,8 @@ module branch_unit (
         default: 
           jump = 0;
       endcase
+    else 
+      jump = 0;
   end
 
 endmodule

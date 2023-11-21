@@ -81,6 +81,7 @@ module pipeline (
   wire[2:0] DM_CTRL_EX;
   wire[4:0] BR_OP_EX;
   wire[1:0] RU_DATA_SRC_EX;
+  wire RU_WRITE_EX;
 
 
   wire[31:0] PC_PLUS_4_ME;
@@ -90,12 +91,20 @@ module pipeline (
   wire DM_WRITE_ME;
   wire[2:0] DM_CTRL_ME;
   wire[1:0] RU_DATA_SRC_ME;
+  wire RU_WRITE_ME;
+
+  wire[31:0] PC_PLUS_4_WB;
+  wire[31:0] RESULT_ALU_WB;
+  wire[31:0] DATA_MEMORY_READ_WB;
+  wire[4:0] RD_WB;
+  wire[1:0] RU_DATA_SRC_WB;
+  wire RU_WRITE_WB;
 
   /*----------------------------------------------------------*/
   /*---------------------PIPELINE COMPONENTS-------------------*/
 
   if_de if_de(
-    .incrementPCIn(NEXT_ADDRESS_PC),
+    .incrementPCIn(PC_PLUS_4),
     .PCIn(ADDRESS_PC),
     .instructionIn(INSTRUCTION),
     .clk(clk),
@@ -118,6 +127,7 @@ module pipeline (
     .dm_ctrlIn(DM_CTRL),
     .br_opIn(BR_OP),
     .ru_data_srcIn(RU_DATA_SRC),
+    .ru_writeIn(RU_WRITE),
     .clk(clk),
 
 /*OUTPUT*/
@@ -133,7 +143,8 @@ module pipeline (
     .dm_writeOut(DM_WRITE_EX),
     .dm_ctrlOut(DM_CTRL_EX),
     .br_opOut(BR_OP_EX),
-    .ru_data_srcOut(RU_DATA_SRC_EX)
+    .ru_data_srcOut(RU_DATA_SRC_EX),
+    .ru_writeOut(RU_WRITE_EX)
   );
   
   ex_me ex_me(
@@ -144,6 +155,7 @@ module pipeline (
     .dm_writeIn(DM_WRITE),
     .dm_ctrlIn(DM_CTRL),
     .ru_data_srcIn(RU_DATA_SRC),
+    .ru_writeIn(RU_WRITE_EX),
     .clk(clk),
 
     .incrementPCOut(PC_PLUS_4_ME),
@@ -152,8 +164,9 @@ module pipeline (
     .rdOut(RD_ME),
     .dm_writeOut(DM_WRITE_ME),
     .dm_ctrlOut(DM_CTRL_ME),
-    .ru_data_srcOut(RU_DATA_SRC_ME)
-  );
+    .ru_data_srcOut(RU_DATA_SRC_ME),
+    .ru_writeOut(RU_WRITE_ME) 
+    );
 
   me_wb me_wb(
     .incrementPCIn(PC_PLUS_4_ME),
@@ -161,13 +174,15 @@ module pipeline (
     .DMDataRdIn(DATA_MEMORY_READ),
     .rdIn(RD_ME),
     .ru_data_srcIn(RU_DATA_SRC_ME),
+    .ru_writeIn(RU_WRITE_ME),
     .clk(clk),
 
-    .incrementPCOut(PC_PLUS_4),
-    .ALUResOut(RESULT_ALU),
-    .DMDataRdOut(DATA_MEMORY_READ),
-    .rdOut(RD),
-    .ru_data_srcOut(RU_DATA_SRC)
+    .incrementPCOut(PC_PLUS_4_WB),
+    .ALUResOut(RESULT_ALU_WB),
+    .DMDataRdOut(DATA_MEMORY_READ_WB),
+    .rdOut(RD_WB),
+    .ru_data_srcOut(RU_DATA_SRC_WB),
+    .ru_writeOut(RU_WRITE_WB)
   );
 
 
@@ -206,12 +221,12 @@ module pipeline (
     .clk(clk),
     .rs1(RS1),
     .rs2(RS2),
-    .rd(RD),
+    .rd(RD_WB),
     .data(DATA_WRITE_REGISTER),
     .rs1Data(REGISTER_DATA_1),
     .rs2Data(REGISTER_DATA_2),
     .tr(tr),
-    .writeEnable(RU_WRITE)
+    .writeEnable(RU_WRITE_WB)
   );
 
   imm_unit imm_unit(
@@ -239,29 +254,29 @@ module pipeline (
     .input_1(REGISTER_DATA_1),
     .input_2(ADDRESS_PC),
     .input_3(ZERO_ALU_A_SRC),
-    .select(ALU_A_SRC),
+    .select(ALU_A_SRC_EX),
     .output_32(A_DATA_ALU)
   );
 
   mux2to1 mux2to1_B(
     .input_1(REGISTER_DATA_2),
     .input_2(IMM_EXT),
-    .select(ALU_B_SRC),
+    .select(ALU_B_SRC_EX),
     .output_32(B_DATA_ALU)
   );
 
   alu alu(
     .operand1(A_DATA_ALU),
     .operand2(B_DATA_ALU),
-    .func3(ALU_OP[2:0]),
-    .subsra(ALU_OP[3]),
+    .func3(ALU_OP_EX[2:0]),
+    .subsra(ALU_OP_EX[3]),
     .result(RESULT_ALU)
   );
 
   branch_unit branch_unit(
     .rs1(REGISTER_DATA_1),
     .rs2(REGISTER_DATA_2),
-    .br_op(BR_OP),
+    .br_op(BR_OP_EX),
     .jump(NEXT_PC_SRC)
   );
 
@@ -275,16 +290,16 @@ module pipeline (
   data_memory data_memory(
     .address(RESULT_ALU),
     .datawr(REGISTER_DATA_2),
-    .dmwr(DM_WRITE),
-    .dmctrl(DM_CTRL),
+    .dmwr(DM_WRITE_ME),
+    .dmctrl(DM_CTRL_ME),
     .datard(DATA_MEMORY_READ)
   );
 
   mux3to1 mux3to1(
-    .input_1(RESULT_ALU),
-    .input_2(DATA_MEMORY_READ),
-    .input_3(PC_PLUS_4),
-    .select(RU_DATA_SRC),
+    .input_1(RESULT_ALU_WB),
+    .input_2(DATA_MEMORY_READ_WB),
+    .input_3(PC_PLUS_4_WB),
+    .select(RU_DATA_SRC_WB),
     .output_32(DATA_WRITE_REGISTER)
   );
 

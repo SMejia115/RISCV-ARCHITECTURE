@@ -14,6 +14,7 @@ module de_ex(
   input[2:0] dm_ctrlIn,
   input[4:0] br_opIn,
   input[1:0] ru_data_srcIn,
+  input ru_writeIn,
   input clk,
 
   output reg[31:0] incrementPCOut,
@@ -29,7 +30,8 @@ module de_ex(
   output reg dm_writeOut,
   output reg[2:0] dm_ctrlOut,
   output reg[4:0] br_opOut,
-  output reg[1:0] ru_data_srcOut
+  output reg[1:0] ru_data_srcOut,
+  output reg ru_writeOut
 );
 
 always @(posedge clk) begin
@@ -47,6 +49,7 @@ always @(posedge clk) begin
   dm_ctrlOut = dm_ctrlIn;
   br_opOut = br_opIn;
   ru_data_srcOut = ru_data_srcIn;
+  ru_writeOut = ru_writeIn;
   
 end
   
