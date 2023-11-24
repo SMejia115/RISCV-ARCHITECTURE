@@ -33,6 +33,9 @@ module de_ex(
   output reg[1:0] ru_data_srcOut,
   output reg ru_writeOut
 );
+initial begin
+  #20;
+end
 
 always @(posedge clk) begin
   incrementPCOut = incrementPCIn;
