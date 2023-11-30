@@ -23,9 +23,10 @@ module pipeline_tb;
 
     #10; 
     reset = 0;
-    tr = 1;
 
-    #86;
+    #140 tr = 1;
+
+    #6;
  
 
     $finish;

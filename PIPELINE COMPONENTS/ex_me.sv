@@ -22,7 +22,8 @@ module ex_me(
 
 );
 
-always @(posedge clk) begin
+always @(negedge clk) begin
+  // #10;
   incrementPCOut = incrementPCIn;
   ALUResOut = ALUResIn;
   RS2Out = RS2In;

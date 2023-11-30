@@ -69,7 +69,7 @@ module pipeline (
 
 
   wire[31:0] PC_PLUS_4_EX;
-  wire[31:0] ADDRESS_PC_DE_EX;
+  wire[31:0] ADDRESS_PC_EX;
   wire[31:0] REGISTER_DATA_1_EX;
   wire[31:0] REGISTER_DATA_2_EX;
   wire[31:0] IMM_EXT_EX;
@@ -132,7 +132,7 @@ module pipeline (
 
 /*OUTPUT*/
     .incrementPCOut(PC_PLUS_4_EX),
-    .PCOut(ADDRESS_PC_DE_EX),
+    .PCOut(ADDRESS_PC_EX),
     .RS1Out(REGISTER_DATA_1_EX),
     .RS2Out(REGISTER_DATA_2_EX),
     .immExtOut(IMM_EXT_EX),
@@ -251,16 +251,16 @@ module pipeline (
   );
 
   mux3to1 mux3to1_A(
-    .input_1(REGISTER_DATA_1),
-    .input_2(ADDRESS_PC),
+    .input_1(REGISTER_DATA_1_EX),
+    .input_2(ADDRESS_PC_EX),
     .input_3(ZERO_ALU_A_SRC),
     .select(ALU_A_SRC_EX),
     .output_32(A_DATA_ALU)
   );
 
   mux2to1 mux2to1_B(
-    .input_1(REGISTER_DATA_2),
-    .input_2(IMM_EXT),
+    .input_1(REGISTER_DATA_2_EX),
+    .input_2(IMM_EXT_EX),
     .select(ALU_B_SRC_EX),
     .output_32(B_DATA_ALU)
   );
@@ -274,8 +274,8 @@ module pipeline (
   );
 
   branch_unit branch_unit(
-    .rs1(REGISTER_DATA_1),
-    .rs2(REGISTER_DATA_2),
+    .rs1(REGISTER_DATA_1_EX),
+    .rs2(REGISTER_DATA_2_EX),
     .br_op(BR_OP_EX),
     .jump(NEXT_PC_SRC)
   );
@@ -288,8 +288,8 @@ module pipeline (
   );
 
   data_memory data_memory(
-    .address(RESULT_ALU),
-    .datawr(REGISTER_DATA_2),
+    .address(RESULT_ALU_ME),
+    .datawr(REGISTER_DATA_2_ME),
     .dmwr(DM_WRITE_ME),
     .dmctrl(DM_CTRL_ME),
     .datard(DATA_MEMORY_READ)

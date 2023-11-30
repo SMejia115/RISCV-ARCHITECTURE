@@ -9,11 +9,8 @@ module if_de(
   output reg[31:0] instructionOut,
   output reg[31:0] incrementPCOut
 );
-initial begin
-  #10;
-end
 
-always @(posedge clk) begin
+always @(negedge clk) begin
   // #10;
   PCOut = PCIn;
   instructionOut = instructionIn;

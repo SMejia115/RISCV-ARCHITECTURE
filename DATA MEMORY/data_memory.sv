@@ -14,7 +14,7 @@ module data_memory(
         case(dmctrl)
             3'b000: //Byte
                 if (dmwr) // Write (sb)
-                    memory[address] = {datawr[7:0]};  
+                    memory[address] = {datawr[7:0]};
                 else // Read (lb)
                     datard = {{24{memory[address][7]}}, memory[address][7:0]};  //Se extiende el signo 
             3'b001: // Half
@@ -31,8 +31,9 @@ module data_memory(
                     memory[address+2] = datawr[23:16];
                     memory[address+3] = datawr[31:24];  
                 end
-                else// Read
+                else begin// Read
                     datard = {memory[address+3], memory[address+2], memory[address+1], memory[address]};  // Leer palabra
+                end
             3'b100: // Unsigned Byte
                 if (dmwr)// Write (sb)
                     memory[address] = datawr[7:0];  

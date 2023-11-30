@@ -18,6 +18,7 @@ module me_wb(
 );
 
 always @(posedge clk) begin
+  // #10;
   incrementPCOut = incrementPCIn;
   ALUResOut = ALUResIn;
   DMDataRdOut = DMDataRdIn;
