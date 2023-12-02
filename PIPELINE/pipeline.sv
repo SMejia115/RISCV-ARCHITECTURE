@@ -13,6 +13,7 @@
 `include "../PIPELINE COMPONENTS/de_ex.sv"
 `include "../PIPELINE COMPONENTS/ex_me.sv"
 `include "../PIPELINE COMPONENTS/me_wb.sv"
+`include "../PIPELINE COMPONENTS/forwarding_unit.sv"
 
 
 module pipeline (
@@ -72,6 +73,8 @@ module pipeline (
   wire[31:0] ADDRESS_PC_EX;
   wire[31:0] REGISTER_DATA_1_EX;
   wire[31:0] REGISTER_DATA_2_EX;
+  wire[4:0] RS1_EX;
+  wire[4:0] RS2_EX;
   wire[31:0] IMM_EXT_EX;
   wire[4:0] RD_EX;
   wire[3:0] ALU_OP_EX;
@@ -100,6 +103,12 @@ module pipeline (
   wire[1:0] RU_DATA_SRC_WB;
   wire RU_WRITE_WB;
 
+  wire[31:0] RS1_DATA_FORWARD;
+  wire[31:0] RS2_DATA_FORWARD;
+
+  wire[1:0] SEL_RS1_FORWARD;
+  wire[1:0] SEL_RS2_FORWARD;
+
   /*----------------------------------------------------------*/
   /*---------------------PIPELINE COMPONENTS-------------------*/
 
@@ -116,8 +125,10 @@ module pipeline (
   de_ex de_ex(
     .incrementPCIn(PC_PLUS_4_DE),
     .PCIn(ADDRESS_PC_DE),
-    .RS1In(REGISTER_DATA_1),
-    .RS2In(REGISTER_DATA_2),
+    .RS1DataIn(REGISTER_DATA_1),
+    .RS2DataIn(REGISTER_DATA_2),
+    .RS1In(RS1),
+    .RS2In(RS2),
     .immExtIn(IMM_EXT),
     .rdIn(RD),
     .alu_opIn(ALU_OP),
@@ -133,8 +144,10 @@ module pipeline (
 /*OUTPUT*/
     .incrementPCOut(PC_PLUS_4_EX),
     .PCOut(ADDRESS_PC_EX),
-    .RS1Out(REGISTER_DATA_1_EX),
-    .RS2Out(REGISTER_DATA_2_EX),
+    .RS1DataOut(REGISTER_DATA_1_EX),
+    .RS2DataOut(REGISTER_DATA_2_EX),
+    .RS1Out(RS1_EX),
+    .RS2Out(RS2_EX),
     .immExtOut(IMM_EXT_EX),
     .rdOut(RD_EX),
     .alu_opOut(ALU_OP_EX),
@@ -183,6 +196,36 @@ module pipeline (
     .rdOut(RD_WB),
     .ru_data_srcOut(RU_DATA_SRC_WB),
     .ru_writeOut(RU_WRITE_WB)
+  );
+
+
+  mux3to1 mux_forward_rs1(
+    .input_1(REGISTER_DATA_1_EX),
+    .input_2(RESULT_ALU_ME),
+    .input_3(DATA_WRITE_REGISTER),
+    .select(SEL_RS1_FORWARD),
+    .output_32(RS1_DATA_FORWARD)
+  );
+
+  mux3to1 mux_forward_rs2(
+    .input_1(REGISTER_DATA_2_EX),
+    .input_2(RESULT_ALU_ME),
+    .input_3(DATA_WRITE_REGISTER),
+    .select(SEL_RS2_FORWARD),
+    .output_32(RS2_DATA_FORWARD)
+  );
+
+
+  forwarding_unit forwarding_unit(
+    .rs1_ex(RS1_EX),
+    .rs2_ex(RS2_EX),
+    .rd_me(RD_ME),
+    .rd_wb(RD_WB),
+    .ru_write_me(RU_WRITE_ME),
+    .ru_write_wb(RU_WRITE_WB),
+
+    .rs1_sel(SEL_RS1_FORWARD),
+    .rs2_sel(SEL_RS2_FORWARD)
   );
 
 

@@ -2,8 +2,10 @@
 module de_ex(
   input[31:0] incrementPCIn,
   input[31:0] PCIn,
-  input[31:0] RS1In,
-  input[31:0] RS2In,
+  input[4:0] RS1In,
+  input[4:0] RS2In,
+  input[31:0] RS1DataIn,
+  input[31:0] RS2DataIn,
   input[31:0] immExtIn,
   input[4:0] rdIn,
   /*Control Unit Inputs*/
@@ -19,8 +21,10 @@ module de_ex(
 
   output reg[31:0] incrementPCOut,
   output reg[31:0] PCOut,
-  output reg[31:0] RS1Out,
-  output reg[31:0] RS2Out,
+  output reg[4:0] RS1Out,
+  output reg[4:0] RS2Out,
+  output reg[31:0] RS1DataOut,
+  output reg[31:0] RS2DataOut,
   output reg[31:0] immExtOut,
   output reg[4:0] rdOut,
   /*Control Unit Outputs*/
@@ -36,8 +40,10 @@ module de_ex(
 
 reg[31:0] incrementPCOut_reg;
 reg[31:0] PCOut_reg;
-reg[31:0] RS1Out_reg;
-reg[31:0] RS2Out_reg;
+reg[4:0] RS1Out_reg;
+reg[4:0] RS2Out_reg;
+reg[31:0] RS1DataOut_reg;
+reg[31:0] RS2DataOut_reg;
 reg[31:0] immExtOut_reg;
 reg[4:0] rdOut_reg;
 reg[3:0] alu_opOut_reg;
@@ -54,6 +60,8 @@ always @(negedge clk) begin
   PCOut_reg = PCIn;
   RS1Out_reg = RS1In;
   RS2Out_reg = RS2In;
+  RS1DataOut_reg = RS1DataIn;
+  RS2DataOut_reg = RS2DataIn;
   immExtOut_reg = immExtIn;
   rdOut_reg = rdIn;
   /*Control Unit*/
@@ -72,6 +80,8 @@ always @(posedge clk) begin
   PCOut = PCOut_reg;
   RS1Out = RS1Out_reg;
   RS2Out = RS2Out_reg;
+  RS1DataOut = RS1DataOut_reg;
+  RS2DataOut = RS2DataOut_reg;
   immExtOut = immExtOut_reg;
   rdOut = rdOut_reg;
   /*Control Unit*/
