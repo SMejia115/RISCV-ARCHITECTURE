@@ -10,11 +10,20 @@ module if_de(
   output reg[31:0] incrementPCOut
 );
 
+reg[31:0] PCOut_reg;
+reg[31:0] instructionOut_reg;
+reg[31:0] incrementPCOut_reg;
+
 always @(negedge clk) begin
-  // #10;
-  PCOut = PCIn;
-  instructionOut = instructionIn;
-  incrementPCOut = incrementPCIn;
+  PCOut_reg = PCIn;
+  instructionOut_reg = instructionIn;
+  incrementPCOut_reg = incrementPCIn;
+end
+
+always @(posedge clk) begin
+  PCOut = PCOut_reg;
+  instructionOut = instructionOut_reg;
+  incrementPCOut = incrementPCOut_reg;
 end
   
 endmodule

@@ -34,24 +34,55 @@ module de_ex(
   output reg ru_writeOut
 );
 
-always @(posedge clk) begin
-  // #10;
-  incrementPCOut = incrementPCIn;
-  PCOut = PCIn;
-  RS1Out = RS1In;
-  RS2Out = RS2In;
-  immExtOut = immExtIn;
-  rdOut = rdIn;
+reg[31:0] incrementPCOut_reg;
+reg[31:0] PCOut_reg;
+reg[31:0] RS1Out_reg;
+reg[31:0] RS2Out_reg;
+reg[31:0] immExtOut_reg;
+reg[4:0] rdOut_reg;
+reg[3:0] alu_opOut_reg;
+reg[1:0] alu_a_srcOut_reg;
+reg alu_b_srcOut_reg;
+reg dm_writeOut_reg;
+reg[2:0] dm_ctrlOut_reg;
+reg[4:0] br_opOut_reg;
+reg[1:0] ru_data_srcOut_reg;
+reg ru_writeOut_reg;
+
+always @(negedge clk) begin
+  incrementPCOut_reg = incrementPCIn;
+  PCOut_reg = PCIn;
+  RS1Out_reg = RS1In;
+  RS2Out_reg = RS2In;
+  immExtOut_reg = immExtIn;
+  rdOut_reg = rdIn;
   /*Control Unit*/
-  alu_opOut = alu_opIn;
-  alu_a_srcOut = alu_a_srcIn;
-  alu_b_srcOut = alu_b_srcIn;
-  dm_writeOut = dm_writeIn;
-  dm_ctrlOut = dm_ctrlIn;
-  br_opOut = br_opIn;
-  ru_data_srcOut = ru_data_srcIn;
-  ru_writeOut = ru_writeIn;
-  
+  alu_opOut_reg = alu_opIn;
+  alu_a_srcOut_reg = alu_a_srcIn;
+  alu_b_srcOut_reg = alu_b_srcIn;
+  dm_writeOut_reg = dm_writeIn;
+  dm_ctrlOut_reg = dm_ctrlIn;
+  br_opOut_reg = br_opIn;
+  ru_data_srcOut_reg = ru_data_srcIn;
+  ru_writeOut_reg = ru_writeIn;
+end
+
+always @(posedge clk) begin
+  incrementPCOut = incrementPCOut_reg;
+  PCOut = PCOut_reg;
+  RS1Out = RS1Out_reg;
+  RS2Out = RS2Out_reg;
+  immExtOut = immExtOut_reg;
+  rdOut = rdOut_reg;
+  /*Control Unit*/
+  alu_opOut = alu_opOut_reg;
+  alu_a_srcOut = alu_a_srcOut_reg;
+  alu_b_srcOut = alu_b_srcOut_reg;
+  dm_writeOut = dm_writeOut_reg;
+  dm_ctrlOut = dm_ctrlOut_reg;
+  br_opOut = br_opOut_reg;
+  ru_data_srcOut = ru_data_srcOut_reg;
+  ru_writeOut = ru_writeOut_reg;
 end
   
 endmodule

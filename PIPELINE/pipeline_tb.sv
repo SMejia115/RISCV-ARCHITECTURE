@@ -23,8 +23,9 @@ module pipeline_tb;
 
     #10; 
     reset = 0;
+    tr = 1;
 
-    #140 tr = 1;
+    #140;
 
     #6;
  

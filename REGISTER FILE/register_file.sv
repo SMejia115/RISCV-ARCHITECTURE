@@ -20,6 +20,7 @@ module register_file (
   // assign registers[0] = 32'b00000000000000000000000000000000; // x0
   always @(negedge clk)
     begin
+      #5;
       if(writeEnable && rd != 5'b00000)
         registers[rd] <= data;
     end

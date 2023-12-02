@@ -22,18 +22,37 @@ module ex_me(
 
 );
 
+reg[31:0] incrementPCOut_reg;
+reg[31:0] ALUResOut_reg;
+reg[31:0] RS2Out_reg;
+reg[4:0] rdOut_reg;
+reg dm_writeOut_reg;
+reg[2:0] dm_ctrlOut_reg;
+reg[1:0] ru_data_srcOut_reg;
+reg ru_writeOut_reg;
+
 always @(negedge clk) begin
-  // #10;
-  incrementPCOut = incrementPCIn;
-  ALUResOut = ALUResIn;
-  RS2Out = RS2In;
-  rdOut = rdIn;
+  incrementPCOut_reg = incrementPCIn;
+  ALUResOut_reg = ALUResIn;
+  RS2Out_reg = RS2In;
+  rdOut_reg = rdIn;
   /*Control Unit*/
-  dm_writeOut = dm_writeIn;
-  dm_ctrlOut = dm_ctrlIn;
-  ru_data_srcOut = ru_data_srcIn;
-  ru_writeOut = ru_writeIn;
-  
+  dm_writeOut_reg = dm_writeIn;
+  dm_ctrlOut_reg = dm_ctrlIn;
+  ru_data_srcOut_reg = ru_data_srcIn;
+  ru_writeOut_reg = ru_writeIn;
+end
+
+always @(posedge clk) begin
+  incrementPCOut = incrementPCOut_reg;
+  ALUResOut = ALUResOut_reg;
+  RS2Out = RS2Out_reg;
+  rdOut = rdOut_reg;
+  /*Control Unit*/
+  dm_writeOut = dm_writeOut_reg;
+  dm_ctrlOut = dm_ctrlOut_reg;
+  ru_data_srcOut = ru_data_srcOut_reg;
+  ru_writeOut = ru_writeOut_reg;
 end
   
 endmodule

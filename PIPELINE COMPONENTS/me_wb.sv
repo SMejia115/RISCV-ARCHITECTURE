@@ -17,16 +17,31 @@ module me_wb(
   output reg ru_writeOut
 );
 
-always @(posedge clk) begin
-  // #10;
-  incrementPCOut = incrementPCIn;
-  ALUResOut = ALUResIn;
-  DMDataRdOut = DMDataRdIn;
-  rdOut = rdIn;
+reg[31:0] incrementPCOut_reg;
+reg[31:0] ALUResOut_reg;
+reg[31:0] DMDataRdOut_reg;
+reg[4:0] rdOut_reg;
+reg[1:0] ru_data_srcOut_reg;
+reg ru_writeOut_reg;
+
+always @(negedge clk) begin
+  incrementPCOut_reg = incrementPCIn;
+  ALUResOut_reg = ALUResIn;
+  DMDataRdOut_reg = DMDataRdIn;
+  rdOut_reg = rdIn;
   /*Control Unit*/
-  ru_data_srcOut = ru_data_srcIn;
-  ru_writeOut = ru_writeIn;
-  
+  ru_data_srcOut_reg = ru_data_srcIn;
+  ru_writeOut_reg = ru_writeIn;
+end
+
+always @(posedge clk) begin
+  incrementPCOut = incrementPCOut_reg;
+  ALUResOut = ALUResOut_reg;
+  DMDataRdOut = DMDataRdOut_reg;
+  rdOut = rdOut_reg;
+  /*Control Unit*/
+  ru_data_srcOut = ru_data_srcOut_reg;
+  ru_writeOut = ru_writeOut_reg;
 end
   
 endmodule

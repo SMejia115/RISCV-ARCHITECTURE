@@ -150,11 +150,11 @@ module pipeline (
   ex_me ex_me(
     .incrementPCIn(PC_PLUS_4_EX),
     .ALUResIn(RESULT_ALU),
-    .RS2In(REGISTER_DATA_2),
-    .rdIn(RD),
+    .RS2In(REGISTER_DATA_2_EX),
+    .rdIn(RD_EX),
     .dm_writeIn(DM_WRITE),
     .dm_ctrlIn(DM_CTRL),
-    .ru_data_srcIn(RU_DATA_SRC),
+    .ru_data_srcIn(RU_DATA_SRC_EX),
     .ru_writeIn(RU_WRITE_EX),
     .clk(clk),
 
